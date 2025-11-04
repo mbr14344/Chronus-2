@@ -1,0 +1,34 @@
+{
+    "id": "7b3384e3-2bc4-47a2-8c04-64a274176e85",
+    "name": "AshtelBC",
+    "publisher": "MBR",
+    "version": "1.0.0.440",
+    "brief": "",
+    "description": "",
+    "privacyStatement": "",
+    "EULA": "",
+    "help": "",
+    "url": "",
+    "logo": "",
+    "screenshots": [],
+    "platform": "26.0.0.0",
+    "application": "26.0.30643.32100",
+    "resourceExposurePolicy": {
+        "allowDebugging": true,
+        "allowDownloadingSource": true,
+        "includeSourceInSymbolFile": true
+    },
+    "dependencies": [
+        {
+            "id": "52c5c025-b198-4deb-870a-95ca543bdd80",
+            "name": "Cash Basis Accounting",
+            "publisher": "SimCrest",
+            "version": "1.0.0.0"
+        }
+        
+    ],
+    "runtime": "15.0",
+    "features": [
+        "NoImplicitWith"
+    ]
+}

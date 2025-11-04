@@ -1,0 +1,543 @@
+  procedure FillCashBasisItemSales()
+    var
+        ILE: Record "Item Ledger Entry";
+        CBGLE: Record "SIMC Cash G/L Entry";
+        GetAmount: Decimal;
+        SalesInvHdr: Record "Sales Invoice Header";
+        SalesInvLn: Record "Sales Invoice Line";
+        InsTmpRoyalty: Record TmpRoyalty;
+        CLE: Record "Cust. Ledger Entry";
+        GetDescrip: Text;
+        ChkTmpRoyalty: Record TmpRoyalty;
+        GetTotal: Decimal;
+        totalCashPaid: Decimal;
+        DetCLE: Record "Detailed Cust. Ledg. Entry";
+        GetQty: Decimal;
+        ChkQty: Decimal;
+        Cust: Record Customer;
+        chkItemCount: Integer;
+        ValueEntry: Record "Value Entry";
+        SalesShipmentLn: Record "Sales Shipment Line";
+        bFound: Boolean;
+        TmpCashLE: Record TmpCashLE;
+        ChkCBGLE: Record TmpCashLE;
+        EntryNo: BigInteger;
+        DateTime: DateTime;
+        Company: Record "Company Information";
+        StartDate: Date;
+        "Item License": Record ItemLicense;
+        TmpRoyalty: Record "Cash Basis Item Sales"; //this is the final destination table
+        GetRoyaltySum: Record TmpRoyaltySum;
+        ChkItem: Record Item;
+        Item: Record Item;
+        ItemRec: Record Item;
+        ChkItemLicense: Record ItemLicense;
+        SalesNRecieve: Record "Sales & Receivables Setup";
+        EndDate: Date;
+    begin
+
+        //pr 4/8/25 - start
+        SalesNRecieve.Reset();
+        SalesNRecieve.Get();
+        StartDate := SalesNRecieve.SalesByItemSummaryStartDate;
+        EndDate := DMY2Date(31, 12, 2024);
+        //pr 4/8/25 - end
+        DateTime := CurrentDateTime();
+        Message('Start time =' + Format(DateTime));
+        if Company.Get then;
+        TmpRoyalty.reset;
+        TmpRoyalty.DeleteAll();
+        GetRoyaltySum.DeleteAll();
+        TmpCashLE.DeleteAll();
+        ChkCBGLE.DeleteAll();
+
+        CBGLE.Reset();
+        CBGLE.SetCurrentKey("Posting Date");
+        CBGLE.SetRange("Posting Date", StartDate, EndDate);
+        CBGLE.SetRange("Applied Document Type", CBGLE."Applied Document Type"::Payment);
+        CBGLE.SetRange("Document Type", CBGLE."Document Type"::"Sales Invoice");
+        CBGLE.SetRange("Source Type", CBGLE."Source Type"::Customer);
+        CBGLE.SetRange("G/L Account No.", '40200');
+        CBGLE.SETFILTER("Document No.", 'PS-INV110204|PS-INV111238|PS-INV111236|25101255|PS-INV111776|PS-INV111469|PS-INV110202|PS-INV110202|PS-INV110202|PS-INV111453|PS-INV111453|PS-INV111453');  //mbr test   
+
+        IF CBGLE.FindSet() then
+            repeat
+                EntryNo += 1;
+                TmpCashLE.Init();
+                TmpCashLE."Entry No." := EntryNo;
+                TmpCashLE."Posting Date" := CBGLE."Posting Date";
+                TmpCashLE."Applied Document Type" := CBGLE."Applied Document Type";
+                TmpCashLE."Source Type" := CBGLE."Source Type";
+                TmpCashLE."Source No." := CBGLE."Source No.";
+                TmpCashLE."Document Type" := CBGLE."Document Type";
+                TmpCashLE."Document No." := CBGLE."Document No.";
+                TmpCashLE.Amount := CBGLE.Amount;
+                TmpCashLE.Insert();
+
+                ChkCBGLE.Init();
+                ChkCBGLE."Entry No." := EntryNo;
+                ChkCBGLE."Posting Date" := CBGLE."Posting Date";
+                ChkCBGLE."Applied Document Type" := CBGLE."Applied Document Type";
+                ChkCBGLE."Source Type" := CBGLE."Source Type";
+                ChkCBGLE."Source No." := CBGLE."Source No.";
+                ChkCBGLE."Document Type" := CBGLE."Document Type";
+                ChkCBGLE."Document No." := CBGLE."Document No.";
+                ChkCBGLE.Amount := CBGLE.Amount;
+                ChkCBGLE.Insert();
+
+            until CBGLE.Next() = 0;
+
+
+        TmpCashLE.Reset();
+        TmpCashLE.SetCurrentKey("Posting Date", "Applied Document Type", "Source Type", "Document Type");
+        TmpCashLE.SetRange("Posting Date", StartDate, EndDate);
+        TmpCashLE.SetRange("Applied Document Type", TmpCashLE."Applied Document Type"::Payment);
+        TmpCashLE.SetRange("Source Type", TmpCashLE."Source Type"::Customer);
+        TmpCashLE.SetRange("Document Type", TmpCashLE."Document Type"::"Sales Invoice");
+
+
+
+        IF TmpCashLE.FindSet() then
+            repeat
+                GetAmount := 0;
+
+                ChkCBGLE.Reset();
+                ChkCBGLE.SetCurrentKey("Posting Date", "Applied Document Type", "Source Type", "Source No.", "Document Type", "Document No.");
+                ChkCBGLE.SetRange("Posting Date", StartDate, EndDate);
+                ChkCBGLE.SetRange("Applied Document Type", ChkCBGLE."Applied Document Type"::Payment);
+                ChkCBGLE.SetRange("Source Type", TmpCashLE."Source Type");
+                ChkCBGLE.SetRange("Source No.", TmpCashLE."Source No.");
+                ChkCBGLE.SetRange("Document Type", TmpCashLE."Document Type");
+                ChkCBGLE.SetRange("Document No.", TmpCashLE."Document No.");
+
+
+
+                if ChkCBGLE.FindSet() then
+                    repeat
+                        GetAmount := GetAmount + Abs(ChkCBGLE.Amount);
+                    until ChkCBGLE.Next() = 0;
+
+                //now, let's add any early payment discount amounts which is in the CLE.  In Cash Basis LE, this is recorded in the G/L 40300 account
+                CLE.Reset();
+                CLE.SetRange("Document No.", TmpCashLE."Document No.");
+                CLE.SetRange("Document Type", CLE."Document Type"::Invoice);
+                CLE.SetRange("Customer No.", TmpCashLE."Source No.");
+                CLE.SetFilter("Pmt. Disc. Given (LCY)", '>%1', 0);
+                IF CLE.FindFirst() then
+                    GetAmount := GetAmount - CLE."Pmt. Disc. Given (LCY)";
+
+                GetRoyaltySum.Reset();
+                GetRoyaltySum.SetCurrentKey(Type, CustNo, InvoiceNo);
+                GetRoyaltySum.SetRange(Type, 'InvoiceTotal');
+                GetRoyaltySum.SetRange(CustNo, TmpCashLE."Source No.");
+                GetRoyaltySum.SetRange(InvoiceNo, TmpCashLE."Document No.");
+
+
+                //Calculate total Invoice Amounts and store for later use
+                If NOT GetRoyaltySum.FindFirst() then begin
+                    GetRoyaltySum.Init();
+                    GetRoyaltySum.CustNo := TmpCashLE."Source No.";
+                    GetRoyaltySum.Type := 'InvoiceTotal';
+                    GetRoyaltySum.CashPaidAmount := GetAmount;
+                    GetRoyaltySum.InvoiceNo := TmpCashLE."Document No.";
+                    GetRoyaltySum.DatePaid := TmpCashLE."Posting Date";
+                    IF Cust.Get(TmpCashLE."Source No.") then begin
+                        GetRoyaltySum.CustName := Cust.Name;
+                        SalesInvHdr.Reset();
+                        SalesInvHdr.SetCurrentKey("No.", "Sell-to Customer No.", "Order No.");
+                        SalesInvHdr.SetRange("No.", GetRoyaltySum.InvoiceNo);
+                        SalesInvHdr.SetRange("Sell-to Customer No.", TmpCashLE."Source No.");
+                        If SalesInvHdr.FindFirst() then begin
+                            GetRoyaltySum.OrderNo := SalesInvHdr."Order No.";
+                            //Calculate Total Invoice amount - adjusted or not
+                            if GetRoyaltySum.OrderNo <> '' then begin
+                                //Now, sum up Item line total by going to Value Entries as some items may have been adjusted
+                                SalesInvLn.Reset();
+                                SalesInvLn.SetRange("Document No.", SalesInvHdr."No.");
+                                SalesInvLn.SetFilter(Type, '=%1', SalesInvLn.Type::Item);
+                                SalesInvLn.SetFilter(Quantity, '>%1', 0);
+                                If SalesInvLn.FindSet() then
+                                    repeat
+                                        SalesShipmentLn.Reset();
+                                        SalesShipmentLn.SetRange("Order No.", GetRoyaltySum.OrderNo);
+                                        SalesShipmentLn.SetRange(Type, SalesShipmentLn.Type::Item);
+                                        SalesShipmentLn.SetRange("No.", SalesInvLn."No.");
+                                        SalesShipmentLn.SetRange("Order Line No.", SalesInvLn."Order Line No.");
+                                        IF SalesShipmentLn.FindSet() then
+                                            repeat
+                                                ILE.Reset();
+                                                ILE.SetCurrentKey("Entry No.", "Source Type", "Source No.");
+                                                ILE.SetRange("Entry Type", ILE."Entry Type"::Sale);
+                                                ILE.SetRange("Source Type", ILE."Source Type"::Customer);
+                                                ILE.SetRange("Source No.", GetRoyaltySum.CustNo);
+                                                ILE.SetRange("Sales Shipment Source No.", GetRoyaltySum.OrderNo);
+                                                ILE.SetRange("Item No.", SalesShipmentLn."No.");
+                                                ILE.SetRange("Document No.", SalesShipmentLn."Document No.");
+                                                ILE.SetRange("Document Type", ILE."Document Type"::"Sales Shipment");
+                                                ILE.SetRange("Document Line No.", SalesShipmentLn."Line No.");
+
+                                                IF ILE.FindSet() then
+                                                    repeat
+                                                        ValueEntry.Reset();
+                                                        ValueEntry.SetRange("Item Ledger Entry Type", ValueEntry."Item Ledger Entry Type"::Sale);
+                                                        ValueEntry.SetRange("Entry Type", ValueEntry."Entry Type"::"Direct Cost");
+                                                        ValueEntry.SetRange("Item Ledger Entry No.", ILE."Entry No.");
+
+                                                        If ValueEntry.FindSet() then
+                                                            repeat
+                                                                GetRoyaltySum.PaidAmount += ValueEntry."Sales Amount (Actual)";
+                                                            until ValueEntry.Next() = 0;
+                                                    until ILE.Next() = 0;
+                                            Until SalesShipmentLn.Next() = 0
+
+                                    until SalesInvLn.Next() = 0;
+
+
+                            end
+                            else begin
+                                ValueEntry.Reset();
+                                ValueEntry.SetRange("Document No.", GetRoyaltySum.InvoiceNo);
+                                ValueEntry.SetRange("Document Type", ValueEntry."Document Type"::"Sales Invoice");
+                                ValueEntry.SetRange("Item Ledger Entry Type", ValueEntry."Item Ledger Entry Type"::Sale);
+                                ValueEntry.SetRange("Entry Type", ValueEntry."Entry Type"::"Direct Cost");
+                                If ValueEntry.FindSet() then
+                                    repeat
+                                        GetRoyaltySum.PaidAmount += ValueEntry."Sales Amount (Actual)";
+                                    until ValueEntry.Next() = 0;
+                            end;
+                        end;
+                    end;
+
+                    GetRoyaltySum.Insert;
+                end;
+            until TmpCashLE.Next() = 0;
+
+        ItemRec.Reset();
+        ItemRec.SetFilter("No.", TmpRoyalty.ItemNo);
+        if ItemRec.FindFirst() then begin
+            ChkItem.Reset();
+            ChkItem.CopyFilters(ItemRec);
+        end;
+
+
+        ChkItemLicense.RESET;
+        ChkItemLicense.CopyFilters("Item License");
+
+        GetRoyaltySum.reset;
+        GetRoyaltySum.SetCurrentKey(Type);
+        GetRoyaltySum.SetRange(Type, 'InvoiceTotal');
+        GetRoyaltySum.SetFilter(OrderNo, '<>%1', '');
+        IF GetRoyaltySum.FindSet() then
+            repeat
+                ILE.Reset();
+                ILE.SetCurrentKey("Entry No.", "Source Type", "Source No.");
+                ILE.SetRange("Entry Type", ILE."Entry Type"::Sale);
+                ILE.SetRange("Source Type", ILE."Source Type"::Customer);
+                ILE.SetRange("Source No.", GetRoyaltySum.CustNo);
+                ILE.SetRange("Sales Shipment Source No.", GetRoyaltySum.OrderNo);
+                //    ILE.SetRange("Item No.", '95312');  //mbr test
+
+                IF ILE.FindSet() then
+                    repeat
+                        bFound := false;
+                        //check if Chkitem filter applies to ILE
+                        if chkItem.FindSet then begin
+                            chkItem.FindFirst();
+                            repeat
+                                if ChkItem."No." = ILE."Item No." then
+                                    bFound := true;
+                            until (chkItem.Next() = 0) or (bFound = true);
+                        end
+                        else
+                            bFound := true;
+
+                        if bFound = true then begin
+                            //need to check if corresponding invoice number is in Value Entry.  if not, do not include at all;
+                            ValueEntry.Reset();
+                            ValueEntry.SetRange("Document No.", GetRoyaltySum.InvoiceNo);
+                            ValueEntry.SetRange("Document Type", ValueEntry."Document Type"::"Sales Invoice");
+                            ValueEntry.SetRange("Item Ledger Entry Type", ValueEntry."Item Ledger Entry Type"::Sale);
+                            ValueEntry.SetRange("Item No.", ILE."Item No.");
+                            ValueEntry.SetRange("Item Ledger Entry No.", ILE."Entry No.");
+                            ValueEntry.SetRange("Entry Type", ValueEntry."Entry Type"::"Direct Cost");
+                            If ValueEntry.FindFirst() then begin
+                                chkItemCount := 0;
+                                ChkItemLicense.SetRange("Item No.", ILE."Item No.");
+                                ChkItemLicense.SetRange(License, 'DISNEY'); //mbr test
+                                ChkItemLicense.SetRange(Sublicense, 'BLACK PANTHER'); //mbr test
+                                IF ChkItemLicense.FindSet() then
+                                    repeat
+                                        chkItemCount += 1;
+                                        ILE.CalcFields("Sales Amount (Actual)", "Sales Shipment Source No.");
+                                        TmpRoyalty.Reset();
+                                        TmpRoyalty.SetCurrentKey(Type, CustNo, InvoiceNo, License, SubLicense, ItemNo);
+                                        TmpRoyalty.SetRange(Type, 'Invoice');
+                                        TmpRoyalty.SetRange(CustNo, ILE."Source No.");
+                                        TmpRoyalty.SetRange(InvoiceNo, GetRoyaltySum.InvoiceNo);
+                                        TmpRoyalty.SetRange(License, ChkItemLicense.License);
+                                        TmpRoyalty.SetRange(SubLicense, ChkItemLicense.Sublicense);
+                                        TmpRoyalty.SetRange(ItemNo, ILE."Item No.");
+
+
+                                        If TmpRoyalty.FindFirst() then begin
+                                            TmpRoyalty.Qty := TmpRoyalty.Qty + (Abs(ILE."Invoiced Quantity") * ChkItemLicense."License Percentage");
+                                            TmpRoyalty.OriginalAmount := TmpRoyalty.OriginalAmount + (ILE."Sales Amount (Actual)" * ChkItemLicense."License Percentage");
+                                            TmpRoyalty.PaidAmount := Round(TmpRoyalty.PaidAmount + GetRoyaltySum.CashPaidAmount * (ILE."Sales Amount (Actual)" / GetRoyaltySum.PaidAmount) * ChkItemLicense."License Percentage", 0.01);
+                                            TmpRoyalty.OrigPaidAmount := TmpRoyalty.PaidAmount;
+                                            TmpRoyalty.SalesPrice := TmpRoyalty.OriginalAmount / TmpRoyalty.Qty;
+                                            TmpRoyalty.Modify(true);
+                                        end
+                                        else begin
+                                            TmpRoyalty.Init();
+                                            TmpRoyalty.Type := 'Invoice';
+                                            TmpRoyalty.CustNo := ILE."Source No.";
+                                            TmpRoyalty.ExtDocNo := ILE."External Document No.";
+                                            TmpRoyalty.InvoiceNo := GetRoyaltySum.InvoiceNo;
+                                            TmpRoyalty.OrderNo := GetRoyaltySum.OrderNo;
+                                            TmpRoyalty.InvDiscExists := GetRoyaltySum.InvDiscExists;
+                                            TmpRoyalty.ItemNo := ILE."Item No.";
+                                            If Item.get(TmpRoyalty.ItemNo) then
+                                                TmpRoyalty.Description := Item.Description;
+                                            TmpRoyalty.Qty := Abs(ILE."Invoiced Quantity") * ChkItemLicense."License Percentage";
+                                            TmpRoyalty.OriginalAmount := ILE."Sales Amount (Actual)" * ChkItemLicense."License Percentage";
+                                            if TmpRoyalty.Qty > 0 then
+                                                TmpRoyalty.SalesPrice := TmpRoyalty.OriginalAmount / TmpRoyalty.Qty;
+
+                                            //Formula: Paid Amount = ([Cash (or Payment) Received Amount] * ([Cash (or Payment) Received Amount]/[Total Invoice Amount]) * ([Item Line Amount]/[Total Invoice Amount]) * License Percentage
+                                            //New Formula: Paid Amount = ([Cash (or Payment) Received Amount] * ([Item Line Amount]/[Total Invoice Amount]) * License Percentage
+                                            TmpRoyalty.PaidAmount := Round(GetRoyaltySum.CashPaidAmount * (ILE."Sales Amount (Actual)" / GetRoyaltySum.PaidAmount) * ChkItemLicense."License Percentage", 0.01);
+                                            TmpRoyalty.OrigPaidAmount := TmpRoyalty.PaidAmount;
+                                            TmpRoyalty.DatePaid := GetRoyaltySum.DatePaid;
+                                            TmpRoyalty.OrderNo := ILE."Sales Shipment Source No.";
+                                            TmpRoyalty.InvDiscExists := GetRoyaltySum.InvDiscExists;
+                                            TmpRoyalty.License := ChkItemLicense.License;
+                                            TmpRoyalty.SubLicense := ChkItemLicense.Sublicense;
+                                            TmpRoyalty.ItemSort := 0;
+                                            TmpRoyalty.UOM := ILE."Unit of Measure Code";
+                                            TmpRoyalty.CashPaidAmount := GetRoyaltySum.CashPaidAmount;
+                                            TmpRoyalty.CustName := GetRoyaltySum.CustName;
+                                            TmpRoyalty.Insert();
+                                        end;
+
+                                    until ChkItemLicense.Next() = 0
+                                else begin
+                                    chkItemCount += 1;
+                                    ILE.CalcFields("Sales Amount (Actual)", "Sales Shipment Source No.");
+                                    TmpRoyalty.Reset();
+                                    TmpRoyalty.SetCurrentKey(Type, CustNo, InvoiceNo, License, SubLicense, ItemNo);
+                                    TmpRoyalty.SetRange(Type, 'Invoice');
+                                    TmpRoyalty.SetRange(CustNo, ILE."Source No.");
+                                    TmpRoyalty.SetRange(InvoiceNo, GetRoyaltySum.InvoiceNo);
+                                    TmpRoyalty.SetRange(ItemNo, ILE."Item No.");
+
+
+
+                                    If TmpRoyalty.FindFirst() then begin
+                                        TmpRoyalty.Qty := TmpRoyalty.Qty + (Abs(ILE."Invoiced Quantity"));
+                                        TmpRoyalty.OriginalAmount := TmpRoyalty.OriginalAmount + (ILE."Sales Amount (Actual)");
+                                        TmpRoyalty.PaidAmount := Round(TmpRoyalty.PaidAmount + GetRoyaltySum.CashPaidAmount * (ILE."Sales Amount (Actual)" / GetRoyaltySum.PaidAmount), 0.01);
+                                        TmpRoyalty.OrigPaidAmount := TmpRoyalty.PaidAmount;
+                                        TmpRoyalty.SalesPrice := TmpRoyalty.OriginalAmount / TmpRoyalty.Qty;
+                                        TmpRoyalty.Modify(true);
+                                    end
+                                    else begin
+                                        TmpRoyalty.Init();
+                                        TmpRoyalty.Type := 'Invoice';
+                                        TmpRoyalty.CustNo := ILE."Source No.";
+                                        TmpRoyalty.ExtDocNo := ILE."External Document No.";
+                                        TmpRoyalty.InvoiceNo := GetRoyaltySum.InvoiceNo;
+                                        TmpRoyalty.OrderNo := GetRoyaltySum.OrderNo;
+                                        TmpRoyalty.InvDiscExists := GetRoyaltySum.InvDiscExists;
+                                        TmpRoyalty.ItemNo := ILE."Item No.";
+                                        If Item.get(TmpRoyalty.ItemNo) then
+                                            TmpRoyalty.Description := Item.Description;
+                                        TmpRoyalty.Qty := Abs(ILE."Invoiced Quantity");
+                                        TmpRoyalty.OriginalAmount := ILE."Sales Amount (Actual)";
+                                        if TmpRoyalty.Qty > 0 then
+                                            TmpRoyalty.SalesPrice := TmpRoyalty.OriginalAmount / TmpRoyalty.Qty;
+
+                                        //Formula: Paid Amount = ([Cash (or Payment) Received Amount] * ([Cash (or Payment) Received Amount]/[Total Invoice Amount]) * ([Item Line Amount]/[Total Invoice Amount]) * License Percentage
+                                        //New Formula: Paid Amount = ([Cash (or Payment) Received Amount] * ([Item Line Amount]/[Total Invoice Amount]) 
+                                        TmpRoyalty.PaidAmount := Round(GetRoyaltySum.CashPaidAmount * (ILE."Sales Amount (Actual)" / GetRoyaltySum.PaidAmount), 0.01);
+                                        TmpRoyalty.OrigPaidAmount := TmpRoyalty.PaidAmount;
+                                        TmpRoyalty.DatePaid := GetRoyaltySum.DatePaid;
+                                        TmpRoyalty.OrderNo := ILE."Sales Shipment Source No.";
+                                        TmpRoyalty.InvDiscExists := GetRoyaltySum.InvDiscExists;
+                                        TmpRoyalty.ItemSort := 0;
+                                        TmpRoyalty.UOM := ILE."Unit of Measure Code";
+                                        TmpRoyalty.CashPaidAmount := GetRoyaltySum.CashPaidAmount;
+                                        TmpRoyalty.CustName := GetRoyaltySum.CustName;
+                                        TmpRoyalty.License := '';
+                                        TmpRoyalty.SubLicense := '';
+                                        TmpRoyalty.Insert();
+                                    end;
+
+                                    //   end;
+
+
+                                end;
+
+                            end;
+
+                        end;
+                    until ILE.Next() = 0;
+            until GetRoyaltySum.Next() = 0;
+
+        //Now, let's go through Invoices where OrderNo = Blank.  This means invoice was posted directly from Sales Invoice
+        GetRoyaltySum.reset;
+        GetRoyaltySum.SetCurrentKey(Type);
+        GetRoyaltySum.SetRange(Type, 'InvoiceTotal');
+        GetRoyaltySum.SetFilter(OrderNo, '=%1', '');
+        IF GetRoyaltySum.FindSet() then
+            repeat
+                ValueEntry.Reset();
+                ValueEntry.SetRange("Document No.", GetRoyaltySum.InvoiceNo);
+                ValueEntry.SetRange("Document Type", ValueEntry."Document Type"::"Sales Invoice");
+                ValueEntry.SetRange("Item Ledger Entry Type", ValueEntry."Item Ledger Entry Type"::Sale);
+                ValueEntry.SetRange("Entry Type", ValueEntry."Entry Type"::"Direct Cost");
+                ValueEntry.SetRange(Adjustment, false);
+                If ValueEntry.FindSet() then
+                    repeat
+                        ILE.Reset();
+                        ILE.SetRange("Entry No.", ValueEntry."Item Ledger Entry No.");
+                        IF ILE.FindFirst() then begin
+                            bFound := false;
+                            //check if Chkitem filter applies to ILE
+                            if chkItem.FindSet then begin
+                                chkItem.FindFirst();
+                                repeat
+                                    if ChkItem."No." = ILE."Item No." then
+                                        bFound := true;
+                                until (chkItem.Next() = 0) or (bFound = true);
+                            end
+                            else
+                                bFound := true;
+
+                            if bFound = true then begin
+                                chkItemCount := 0;
+                                ChkItemLicense.SetRange("Item No.", ILE."Item No.");
+                                ChkItemLicense.SetRange(License, 'DISNEY'); //mbr test
+                                ChkItemLicense.SetRange(Sublicense, 'BLACK PANTHER'); //mbr test
+                                IF ChkItemLicense.FindSet() then
+                                    repeat
+                                        chkItemCount += 1;
+                                        ILE.CalcFields("Sales Amount (Actual)", "Sales Shipment Source No.");
+                                        TmpRoyalty.Reset();
+                                        TmpRoyalty.SetCurrentKey(Type, CustNo, InvoiceNo, License, SubLicense, ItemNo);
+                                        TmpRoyalty.SetRange(Type, 'Invoice');
+                                        TmpRoyalty.SetRange(CustNo, ILE."Source No.");
+                                        TmpRoyalty.SetRange(InvoiceNo, GetRoyaltySum.InvoiceNo);
+                                        TmpRoyalty.SetRange(License, ChkItemLicense.License);
+                                        TmpRoyalty.SetRange(SubLicense, ChkItemLicense.Sublicense);
+                                        TmpRoyalty.SetRange(ItemNo, ILE."Item No.");
+
+
+                                        If TmpRoyalty.FindFirst() then begin
+                                            TmpRoyalty.Qty := TmpRoyalty.Qty + (Abs(ILE."Invoiced Quantity") * ChkItemLicense."License Percentage");
+                                            TmpRoyalty.OriginalAmount := TmpRoyalty.OriginalAmount + (ILE."Sales Amount (Actual)" * ChkItemLicense."License Percentage");
+                                            TmpRoyalty.PaidAmount := Round(TmpRoyalty.PaidAmount + GetRoyaltySum.CashPaidAmount * (ILE."Sales Amount (Actual)" / GetRoyaltySum.PaidAmount) * ChkItemLicense."License Percentage", 0.01);
+                                            TmpRoyalty.OrigPaidAmount := TmpRoyalty.PaidAmount;
+                                            TmpRoyalty.SalesPrice := TmpRoyalty.OriginalAmount / TmpRoyalty.Qty;
+                                            TmpRoyalty.Modify(true);
+                                        end
+                                        else begin
+                                            TmpRoyalty.Init();
+                                            TmpRoyalty.Type := 'Invoice';
+                                            TmpRoyalty.CustNo := ILE."Source No.";
+                                            TmpRoyalty.ExtDocNo := ILE."External Document No.";
+                                            TmpRoyalty.InvoiceNo := GetRoyaltySum.InvoiceNo;
+                                            TmpRoyalty.OrderNo := GetRoyaltySum.OrderNo;
+                                            TmpRoyalty.InvDiscExists := GetRoyaltySum.InvDiscExists;
+                                            TmpRoyalty.ItemNo := ILE."Item No.";
+                                            If Item.get(TmpRoyalty.ItemNo) then
+                                                TmpRoyalty.Description := Item.Description;
+                                            TmpRoyalty.Qty := Abs(ILE."Invoiced Quantity") * ChkItemLicense."License Percentage";
+                                            TmpRoyalty.OriginalAmount := ILE."Sales Amount (Actual)" * ChkItemLicense."License Percentage";
+                                            if TmpRoyalty.Qty > 0 then
+                                                TmpRoyalty.SalesPrice := TmpRoyalty.OriginalAmount / TmpRoyalty.Qty;
+
+                                            //Formula: Paid Amount = ([Cash (or Payment) Received Amount] * ([Cash (or Payment) Received Amount]/[Total Invoice Amount]) * ([Item Line Amount]/[Total Invoice Amount]) * License Percentage
+                                            //New Formula: Paid Amount = ([Cash (or Payment) Received Amount] * ([Item Line Amount]/[Total Invoice Amount]) * License Percentage
+                                            TmpRoyalty.PaidAmount := Round(GetRoyaltySum.CashPaidAmount * (ILE."Sales Amount (Actual)" / GetRoyaltySum.PaidAmount) * ChkItemLicense."License Percentage", 0.01);
+                                            TmpRoyalty.OrigPaidAmount := TmpRoyalty.PaidAmount;
+                                            TmpRoyalty.DatePaid := GetRoyaltySum.DatePaid;
+                                            TmpRoyalty.OrderNo := ILE."Sales Shipment Source No.";
+                                            TmpRoyalty.InvDiscExists := GetRoyaltySum.InvDiscExists;
+                                            TmpRoyalty.License := ChkItemLicense.License;
+                                            TmpRoyalty.SubLicense := ChkItemLicense.Sublicense;
+                                            TmpRoyalty.ItemSort := 0;
+                                            TmpRoyalty.UOM := ILE."Unit of Measure Code";
+                                            TmpRoyalty.CashPaidAmount := GetRoyaltySum.CashPaidAmount;
+                                            TmpRoyalty.CustName := GetRoyaltySum.CustName;
+                                            TmpRoyalty.Insert();
+                                        end;
+
+                                    until ChkItemLicense.Next() = 0
+                                else begin
+                                    chkItemCount += 1;
+                                    ILE.CalcFields("Sales Amount (Actual)", "Sales Shipment Source No.");
+                                    TmpRoyalty.Reset();
+                                    TmpRoyalty.SetCurrentKey(Type, CustNo, InvoiceNo, License, SubLicense, ItemNo);
+                                    TmpRoyalty.SetRange(Type, 'Invoice');
+                                    TmpRoyalty.SetRange(CustNo, ILE."Source No.");
+                                    TmpRoyalty.SetRange(InvoiceNo, GetRoyaltySum.InvoiceNo);
+                                    TmpRoyalty.SetRange(ItemNo, ILE."Item No.");
+
+
+
+                                    If TmpRoyalty.FindFirst() then begin
+                                        TmpRoyalty.Qty := TmpRoyalty.Qty + (Abs(ILE."Invoiced Quantity"));
+                                        TmpRoyalty.OriginalAmount := TmpRoyalty.OriginalAmount + (ILE."Sales Amount (Actual)");
+                                        TmpRoyalty.PaidAmount := Round(TmpRoyalty.PaidAmount + GetRoyaltySum.CashPaidAmount * (ILE."Sales Amount (Actual)" / GetRoyaltySum.PaidAmount), 0.01);
+                                        TmpRoyalty.OrigPaidAmount := TmpRoyalty.PaidAmount;
+                                        TmpRoyalty.SalesPrice := TmpRoyalty.OriginalAmount / TmpRoyalty.Qty;
+                                        TmpRoyalty.Modify(true);
+                                    end
+                                    else begin
+                                        TmpRoyalty.Init();
+                                        TmpRoyalty.Type := 'Invoice';
+                                        TmpRoyalty.CustNo := ILE."Source No.";
+                                        TmpRoyalty.ExtDocNo := ILE."External Document No.";
+                                        TmpRoyalty.InvoiceNo := GetRoyaltySum.InvoiceNo;
+                                        TmpRoyalty.OrderNo := GetRoyaltySum.OrderNo;
+                                        TmpRoyalty.InvDiscExists := GetRoyaltySum.InvDiscExists;
+                                        TmpRoyalty.ItemNo := ILE."Item No.";
+                                        If Item.get(TmpRoyalty.ItemNo) then
+                                            TmpRoyalty.Description := Item.Description;
+                                        TmpRoyalty.Qty := Abs(ILE."Invoiced Quantity");
+                                        TmpRoyalty.OriginalAmount := ILE."Sales Amount (Actual)";
+                                        if TmpRoyalty.Qty > 0 then
+                                            TmpRoyalty.SalesPrice := TmpRoyalty.OriginalAmount / TmpRoyalty.Qty;
+
+                                        //Formula: Paid Amount = ([Cash (or Payment) Received Amount] * ([Cash (or Payment) Received Amount]/[Total Invoice Amount]) * ([Item Line Amount]/[Total Invoice Amount]) * License Percentage
+                                        //New Formula: Paid Amount = ([Cash (or Payment) Received Amount] * ([Item Line Amount]/[Total Invoice Amount]) 
+                                        TmpRoyalty.PaidAmount := Round(GetRoyaltySum.CashPaidAmount * (ILE."Sales Amount (Actual)" / GetRoyaltySum.PaidAmount), 0.01);
+                                        TmpRoyalty.OrigPaidAmount := TmpRoyalty.PaidAmount;
+                                        TmpRoyalty.DatePaid := GetRoyaltySum.DatePaid;
+                                        TmpRoyalty.OrderNo := ILE."Sales Shipment Source No.";
+                                        TmpRoyalty.InvDiscExists := GetRoyaltySum.InvDiscExists;
+                                        TmpRoyalty.ItemSort := 0;
+                                        TmpRoyalty.UOM := ILE."Unit of Measure Code";
+                                        TmpRoyalty.CashPaidAmount := GetRoyaltySum.CashPaidAmount;
+                                        TmpRoyalty.CustName := GetRoyaltySum.CustName;
+                                        TmpRoyalty.License := '';
+                                        TmpRoyalty.SubLicense := '';
+                                        TmpRoyalty.Insert();
+                                    end;
+                                end;
+                            end;
+                        end;
+                    until ValueEntry.Next() = 0
+
+
+
+            until GetRoyaltySum.Next() = 0;
+
+
+        DateTime := CurrentDateTime();
+        Message('End time =' + Format(DateTime));
+
+
+
+    end;
+    //pr 4/7/25 - end

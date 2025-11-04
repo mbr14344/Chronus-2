@@ -1,0 +1,2049 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>41e2451c-90e0-4bb3-9daa-40238b994deb</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Tablix Name="Tablix1">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>9.73687cm</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>13.85006cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Rectangle Name="Rectangle1">
+                          <ReportItems>
+                            <Textbox Name="ExecutionTime2">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>FROM:</Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>ExecutionTime</rd:DefaultName>
+                              <Top>0.24305in</Top>
+                              <Left>0.02415in</Left>
+                              <Height>0.25in</Height>
+                              <Width>1.01387in</Width>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="ExecutionTime3">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!ShipTo_Add1.Value</Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Normal</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>ExecutionTime</rd:DefaultName>
+                              <Top>0.49306in</Top>
+                              <Left>1.8613in</Left>
+                              <Height>0.17in</Height>
+                              <Width>1.94431in</Width>
+                              <ZIndex>1</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                              </Style>
+                            </Textbox>
+                            <Line Name="Line1">
+                              <Top>0.61736cm</Top>
+                              <Left>4.56896cm</Left>
+                              <Height>2.82222cm</Height>
+                              <Width>0cm</Width>
+                              <ZIndex>2</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                </Border>
+                              </Style>
+                            </Line>
+                            <Line Name="Line2">
+                              <Top>3.43958cm</Top>
+                              <Left>0.04359cm</Left>
+                              <Height>0cm</Height>
+                              <Width>3.78848in</Width>
+                              <ZIndex>3</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                </Border>
+                              </Style>
+                            </Line>
+                            <Textbox Name="ExecutionTime6">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>TO:</Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Left</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>ExecutionTime</rd:DefaultName>
+                              <Top>0.24306in</Top>
+                              <Left>1.86825in</Left>
+                              <Height>0.25in</Height>
+                              <Width>1.01389in</Width>
+                              <ZIndex>4</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                              </Style>
+                            </Textbox>
+                            <Line Name="Line3">
+                              <Top>3.43958cm</Top>
+                              <Left>5.86449cm</Left>
+                              <Height>3.13972cm</Height>
+                              <Width>0cm</Width>
+                              <ZIndex>5</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                </Border>
+                              </Style>
+                            </Line>
+                            <Textbox Name="ExecutionTime10">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>CARRIER:</Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>ExecutionTime</rd:DefaultName>
+                              <Top>1.42361in</Top>
+                              <Left>2.30885in</Left>
+                              <Height>0.17361in</Height>
+                              <Width>1in</Width>
+                              <ZIndex>6</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                              </Style>
+                            </Textbox>
+                            <Line Name="Line4">
+                              <Top>6.57931cm</Top>
+                              <Left>0.0172in</Left>
+                              <Height>0cm</Height>
+                              <Width>3.79542in</Width>
+                              <ZIndex>7</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                </Border>
+                              </Style>
+                            </Line>
+                            <Textbox Name="ExecutionTime11">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>SHIP TO POST:</Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>8pt</FontSize>
+                                        <Format>22/1/23</Format>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>ExecutionTime</rd:DefaultName>
+                              <Top>1.42361in</Top>
+                              <Left>0.04497in</Left>
+                              <Height>0.17361in</Height>
+                              <Width>0.99305in</Width>
+                              <ZIndex>8</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="ExecutionTime12">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!Ship_Agent_Desc.Value</Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Left</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>ExecutionTime</rd:DefaultName>
+                              <Top>1.65278in</Top>
+                              <Left>2.32275in</Left>
+                              <Height>0.18056in</Height>
+                              <Width>1.4829in</Width>
+                              <ZIndex>9</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="ExecutionTime14">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>PRO:</Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>ExecutionTime</rd:DefaultName>
+                              <Top>2.03474in</Top>
+                              <Left>2.32275in</Left>
+                              <Height>0.19445in</Height>
+                              <Width>0.42041in</Width>
+                              <ZIndex>10</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="ExecutionTime15">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>B/L:</Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>ExecutionTime</rd:DefaultName>
+                              <Top>2.28474in</Top>
+                              <Left>2.32274in</Left>
+                              <Height>0.18056in</Height>
+                              <Width>0.32319in</Width>
+                              <ZIndex>11</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                              </Style>
+                            </Textbox>
+                            <Line Name="Line5">
+                              <Top>8.50691cm</Top>
+                              <Left>0cm</Left>
+                              <Height>0cm</Height>
+                              <Width>3.78476in</Width>
+                              <ZIndex>12</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                </Border>
+                              </Style>
+                            </Line>
+                            <Textbox Name="External_Document_No_1">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=First(Fields!External_Document_No_.Value)</Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>External_Document_No_1</rd:DefaultName>
+                              <Top>6.58779cm</Top>
+                              <Left>2.49552cm</Left>
+                              <Height>0.56022cm</Height>
+                              <Width>7.13552cm</Width>
+                              <ZIndex>13</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox34">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>Product Description:</Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Normal</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Left</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox33</rd:DefaultName>
+                              <Top>10.01541cm</Top>
+                              <Left>0cm</Left>
+                              <Height>0.56022cm</Height>
+                              <Width>2.80458cm</Width>
+                              <ZIndex>14</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox35">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!ItemDesc.Value</Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Left</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox33</rd:DefaultName>
+                              <Top>10.01541cm</Top>
+                              <Left>2.80458cm</Left>
+                              <Height>0.56022cm</Height>
+                              <Width>6.80871cm</Width>
+                              <ZIndex>15</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox36">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>Size:</Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Normal</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Left</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox33</rd:DefaultName>
+                              <Top>9.2788cm</Top>
+                              <Left>6.49145cm</Left>
+                              <Height>0.56022cm</Height>
+                              <Width>1.24424cm</Width>
+                              <ZIndex>16</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox37">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>UPC#:</Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Left</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox33</rd:DefaultName>
+                              <Top>9.2788cm</Top>
+                              <Left>0.02583cm</Left>
+                              <Height>0.56022cm</Height>
+                              <Width>1.04069cm</Width>
+                              <ZIndex>17</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox38">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>Style:</Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Normal</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Left</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox33</rd:DefaultName>
+                              <Top>8.64803cm</Top>
+                              <Left>0cm</Left>
+                              <Height>0.56022cm</Height>
+                              <Width>2.31913cm</Width>
+                              <ZIndex>18</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox39">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!Item_No_.Value</Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox33</rd:DefaultName>
+                              <Top>8.64802cm</Top>
+                              <Left>2.49552cm</Left>
+                              <Height>0.56022cm</Height>
+                              <Width>3.19255cm</Width>
+                              <ZIndex>19</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox40">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!UPCCode.Value</Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox33</rd:DefaultName>
+                              <Top>9.2788cm</Top>
+                              <Left>2.49552cm</Left>
+                              <Height>0.56022cm</Height>
+                              <Width>3.81954cm</Width>
+                              <ZIndex>20</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Line Name="Line6">
+                              <Top>10.71674cm</Top>
+                              <Left>0.02583cm</Left>
+                              <Height>0cm</Height>
+                              <Width>3.77459in</Width>
+                              <ZIndex>21</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                </Border>
+                              </Style>
+                            </Line>
+                            <Textbox Name="ExecutionTime16">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>Serial Shipping Container Code</Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>8pt</FontSize>
+                                        <Format>22/1/23</Format>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>ExecutionTime</rd:DefaultName>
+                              <Top>4.27056in</Top>
+                              <Left>0.045in</Left>
+                              <Height>0.13194in</Height>
+                              <Width>1.65277in</Width>
+                              <ZIndex>22</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="ExecutionTime17">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!BarcodeString.Value</Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>12pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>ExecutionTime</rd:DefaultName>
+                              <Top>1.65278in</Top>
+                              <Left>0.02415in</Left>
+                              <Height>0.20139in</Height>
+                              <Width>2.21525in</Width>
+                              <ZIndex>23</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="ExecutionTime5">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!ShipTo_Add2.Value</Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Normal</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>ExecutionTime</rd:DefaultName>
+                              <Top>0.66306in</Top>
+                              <Left>1.86826in</Left>
+                              <Height>0.17in</Height>
+                              <Width>1.94436in</Width>
+                              <ZIndex>24</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="ExecutionTime18">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!ShipTo_Add3.Value</Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Normal</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>ExecutionTime</rd:DefaultName>
+                              <Top>0.83306in</Top>
+                              <Left>1.8613in</Left>
+                              <Height>0.17in</Height>
+                              <Width>1.94433in</Width>
+                              <ZIndex>25</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="ExecutionTime20">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!ShipTo_Add4.Value</Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Normal</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>ExecutionTime</rd:DefaultName>
+                              <Top>1.00306in</Top>
+                              <Left>1.86131in</Left>
+                              <Height>0.17in</Height>
+                              <Width>1.94432in</Width>
+                              <ZIndex>26</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="ExecutionTime4">
+                              <CanGrow>true</CanGrow>
+                              <CanShrink>true</CanShrink>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!ShipFrm_LocAdd1.Value</Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Normal</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>ExecutionTime</rd:DefaultName>
+                              <Top>0.49305in</Top>
+                              <Left>0.02415in</Left>
+                              <Height>0.17in</Height>
+                              <Width>1.70521in</Width>
+                              <ZIndex>27</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="ExecutionTime7">
+                              <CanGrow>true</CanGrow>
+                              <CanShrink>true</CanShrink>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!ShipFrm_LocAdd2.Value</Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Normal</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>ExecutionTime</rd:DefaultName>
+                              <Top>0.66305in</Top>
+                              <Left>0.01716in</Left>
+                              <Height>0.17in</Height>
+                              <Width>1.70521in</Width>
+                              <ZIndex>28</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="ExecutionTime22">
+                              <CanGrow>true</CanGrow>
+                              <CanShrink>true</CanShrink>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!ShipFrm_LocAdd4.Value</Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Normal</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>ExecutionTime</rd:DefaultName>
+                              <Top>0.83305in</Top>
+                              <Left>0.01716in</Left>
+                              <Height>0.17in</Height>
+                              <Width>1.7052in</Width>
+                              <ZIndex>29</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox2">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Code.IDAutomation_SSRS_Code128(Fields!Encoded_SSCCODE.Value,14,true)</Value>
+                                      <Style>
+                                        <FontStyle>Normal</FontStyle>
+                                        <FontFamily>Courier New</FontFamily>
+                                        <FontSize>4pt</FontSize>
+                                        <FontWeight>Thin</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox1</rd:DefaultName>
+                              <Top>11.79972cm</Top>
+                              <Left>0.04369cm</Left>
+                              <Height>1.92688cm</Height>
+                              <Width>9.51674cm</Width>
+                              <ZIndex>30</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="ExecutionTime19">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!BarcodeString2.Value</Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>12pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>ExecutionTime</rd:DefaultName>
+                              <Top>4.41639in</Top>
+                              <Left>0.045in</Left>
+                              <Height>0.20139in</Height>
+                              <Width>3.75371in</Width>
+                              <ZIndex>31</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="ExecutionTime8">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Globals!ExecutionTime</Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Normal</FontWeight>
+                                        <Format>g</Format>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>ExecutionTime</rd:DefaultName>
+                              <Left>0.03111in</Left>
+                              <Height>0.17in</Height>
+                              <Width>1.69125in</Width>
+                              <ZIndex>32</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="ExecutionTime21">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=First(Fields!SCAC.Value)</Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Normal</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Left</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>ExecutionTime</rd:DefaultName>
+                              <Top>1.83334in</Top>
+                              <Left>2.8126in</Left>
+                              <Height>0.2014in</Height>
+                              <Width>0.99305in</Width>
+                              <ZIndex>33</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="ExecutionTime23">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=First(Fields!ProNo.Value)</Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Normal</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Left</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>ExecutionTime</rd:DefaultName>
+                              <Top>2.04863in</Top>
+                              <Left>2.77093in</Left>
+                              <Height>0.18056in</Height>
+                              <Width>1.02082in</Width>
+                              <ZIndex>34</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="ExecutionTime24">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=First(Fields!BOL.Value)</Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Normal</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Left</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>ExecutionTime</rd:DefaultName>
+                              <Top>2.28474in</Top>
+                              <Left>2.67371in</Left>
+                              <Height>0.18056in</Height>
+                              <Width>1.11804in</Width>
+                              <ZIndex>35</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="ExecutionTime13">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>SCAC: </Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>ExecutionTime</rd:DefaultName>
+                              <Top>1.83334in</Top>
+                              <Left>2.3158in</Left>
+                              <Height>0.2014in</Height>
+                              <Width>0.48291in</Width>
+                              <ZIndex>36</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox3">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!Encoded_Postcode.Value</Value>
+                                      <Style>
+                                        <FontFamily>IDAutomationC128M</FontFamily>
+                                        <FontSize>16pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox1</rd:DefaultName>
+                              <Top>4.88598cm</Top>
+                              <Left>0.06133cm</Left>
+                              <Height>1.38783cm</Height>
+                              <Width>5.62674cm</Width>
+                              <ZIndex>37</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="ExecutionTime25">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value EvaluationMode="Constant">PO#:</Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>ExecutionTime</rd:DefaultName>
+                              <Top>2.60417in</Top>
+                              <Left>0.02415in</Left>
+                              <Height>0.20834in</Height>
+                              <Width>0.8889in</Width>
+                              <ZIndex>38</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="ExecutionTime26">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=First(Fields!SpeRefCap.Value, "DataSet_Result") &amp; ":"</Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>ExecutionTime</rd:DefaultName>
+                              <Top>2.85417in</Top>
+                              <Left>0.01017in</Left>
+                              <Height>0.20834in</Height>
+                              <Width>0.8889in</Width>
+                              <ZIndex>39</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="ExecutionTime27">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value EvaluationMode="Constant">CASEPACK:</Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>ExecutionTime</rd:DefaultName>
+                              <Top>3.10418in</Top>
+                              <Left>0.01017in</Left>
+                              <Height>0.20333in</Height>
+                              <Width>0.89589in</Width>
+                              <ZIndex>40</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="External_Document_No_3">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=First(Fields!SpeRefVAlue.Value)</Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>External_Document_No_1</rd:DefaultName>
+                              <Top>7.21856cm</Top>
+                              <Left>2.47777cm</Left>
+                              <Height>0.56022cm</Height>
+                              <Width>7.13552cm</Width>
+                              <ZIndex>41</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="External_Document_No_4">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=First(Fields!CasePackQty.Value)</Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Left</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>External_Document_No_1</rd:DefaultName>
+                              <Top>7.84086cm</Top>
+                              <Left>2.49552cm</Left>
+                              <Height>0.56022cm</Height>
+                              <Width>3.36897cm</Width>
+                              <ZIndex>42</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox41">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>Color:</Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Normal</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Left</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox33</rd:DefaultName>
+                              <Top>8.64803cm</Top>
+                              <Left>6.49147cm</Left>
+                              <Height>0.56022cm</Height>
+                              <Width>1.24423cm</Width>
+                              <ZIndex>43</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox42">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>="Carton " &amp; Fields!LineCount.Value &amp; " of " &amp; Fields!TOtalcount.Value</Value>
+                                      <Style>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox33</rd:DefaultName>
+                              <Top>7.84086cm</Top>
+                              <Left>5.88215cm</Left>
+                              <Height>0.56022cm</Height>
+                              <Width>3.7842cm</Width>
+                              <ZIndex>44</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                              </Style>
+                            </Textbox>
+                          </ReportItems>
+                          <KeepTogether>true</KeepTogether>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                          </Style>
+                        </Rectangle>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <Group Name="Details">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!Document_No_.Value</GroupExpression>
+                      <GroupExpression>=Fields!DocumentLine_No_.Value</GroupExpression>
+                      <GroupExpression>=Fields!Line_No_.Value</GroupExpression>
+                    </GroupExpressions>
+                  </Group>
+                  <SortExpressions>
+                    <SortExpression>
+                      <Value>=Fields!DocumentLine_No_.Value</Value>
+                    </SortExpression>
+                    <SortExpression>
+                      <Value>=Fields!LineCount.Value</Value>
+                    </SortExpression>
+                  </SortExpressions>
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>DataSet_Result</DataSetName>
+            <SortExpressions>
+              <SortExpression>
+                <Value>=Fields!Document_No_.Value</Value>
+              </SortExpression>
+              <SortExpression>
+                <Value>=Fields!DocumentLine_No_.Value</Value>
+              </SortExpression>
+            </SortExpressions>
+            <Height>13.85006cm</Height>
+            <Width>9.73687cm</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
+        </ReportItems>
+        <Height>13.85006cm</Height>
+        <Style />
+      </Body>
+      <Width>9.73687cm</Width>
+      <Page>
+        <PageHeight>15.24cm</PageHeight>
+        <PageWidth>10.16cm</PageWidth>
+        <LeftMargin>0.127cm</LeftMargin>
+        <RightMargin>0cm</RightMargin>
+        <TopMargin>0.381cm</TopMargin>
+        <BottomMargin>0cm</BottomMargin>
+        <ColumnSpacing>1.27cm</ColumnSpacing>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>'*********************************************************************
+'*  Native Barcode Generator for SSRS
+'*  Version 2018
+'*  Copyright, IDAutomation.com, Inc. All rights reserved.
+'*  USA Patent 7,637,436
+'*
+'*  Code 128 Auto
+'*  Example: =code.IDAutomation_SSRS_Code128(Fields!Product_ID.Value)
+'*
+'*  Use the system font: Lucida Console at 4 points
+'*
+'*
+'*  You may incorporate this Source Code in your application
+'*  only if you own a valid license from IDAutomation.com, Inc.
+'*  for the associated product and the copyright notices are not
+'*  removed from the source code.
+'*
+'*  Distributing this source code outside your
+'*  organization requires a Developer License.
+'*********************************************************************
+
+Public Function IDAutomation_SSRS_Code128(DataToEncode As String, Optional BarHeight As Integer =8,Optional ApplyTilde As Boolean = True) As String
+'Change MonoSpaceFont to equal False when not using a mono-spaced font
+'such as Courier New. Barcodes may not be completely accurate when using 
+'proportional fonts.
+
+Try
+
+Dim MonoSpaceFont As Boolean
+Dim Formula As String
+MonoSpaceFont = True
+Dim DataToPrint as String
+Dim WeightedTotal As Integer
+Dim SymbolString As String
+Dim StringLength As Integer
+StringLength = Len(DataToEncode)
+Dim CurrentCharNum As Integer
+Dim CurrentValue As Integer
+Dim WeightValue As Integer
+Dim NumCharsTaken As Integer
+Dim CheckDigitValue As Integer
+Dim PrintableString As String
+Dim Factor As Integer
+Dim I As Integer
+Dim J As Integer
+Dim CorrectFNC As Integer
+Dim nwPattern As String
+Dim OnlyCorrectData As String
+Dim OnlyNumberData As String
+Dim OnlyNumberDataRev As String
+Dim DataToFormat As String
+Dim C128Start As String
+Dim OutString As String 
+Dim datamod As String 
+Dim CharsAdded As Integer
+Dim StringToCheck As String
+Dim M10StringLength As Integer
+Dim M10OnlyCorrectData As String
+Dim M10Factor As Integer
+Dim M10WeightedTotal As Integer
+Dim M10CheckDigit As Integer
+Dim F43WeightTotal As Integer
+Dim strTemp as String 
+Dim F43Set as String
+Dim M37Correct as String
+Dim M37CharCode As Integer
+Dim M37CharValue As Integer
+Dim M37WeightTotal As Integer
+Dim M37CheckDigit As Integer
+PrintableString = ""
+Formula = ""
+Dim ArrayBase As Integer
+Dim CurrentChar As String
+ArrayBase = 0 'Array Base is 1 in Crystal Reports and 0 in Microsoft VB
+Dim CurrentEncoding As String
+CurrentEncoding = ""
+DataToPrint = ""
+CorrectFNC = 0
+'in case ApplyTilde is null, set it to false
+If ApplyTilde &lt;&gt; True Then ApplyTilde = False
+PrintableString = ""
+'ApplyTilde ~???
+If ApplyTilde Then
+    F43Set = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ-. $/+%"
+    OnlyCorrectData = ""
+    StringLength = Len(DataToEncode)
+    For I = 1 To StringLength
+        If (I &lt; StringLength - 2) And Mid(DataToEncode, I, 1) = "~" And IsNumeric(Mid(DataToEncode, I + 1, 3)) Then
+            CurrentCharNum = Val(Mid(DataToEncode, I + 1, 3))
+            OnlyCorrectData = OnlyCorrectData &amp; ChrW(CurrentCharNum)
+            I = I + 3
+        Else
+           OnlyCorrectData = OnlyCorrectData &amp; Mid(DataToEncode, I, 1)
+        End If
+    Next I
+    DataToEncode = OnlyCorrectData
+End If
+'ApplyTilde ~m??
+If ApplyTilde Then
+    OutString = ""
+    StringLength = Len(DataToEncode)
+    For I = 1 To StringLength
+    	'' LM 2017
+        '' check tilde string for ~mNN (MOD10 for GS1) or ~fNN (MOD43 for HIBC) or ~iNN (MOD37 for ISBT)
+        If (i &lt; StringLength - 2) And _
+              (Mid(DataToEncode, i, 2) = "~m" Or Mid(DataToEncode, i, 2) = "~f" Or Mid(DataToEncode, i, 2) = "~i") And _
+               IsNumeric(Mid(DataToEncode, i + 2, 2)) Then
+            WeightValue = Val(Mid(DataToEncode, i + 2, 2))
+            If Mid(DataToEncode, i, 2) = "~m" Then
+                '' ~mNN (MOD10 for GS1)
+                datamod = ""
+                CharsAdded = 0
+                For j = i-1 To 1 Step -1
+                    If IsNumeric(Mid(OutString, j, 1)) Then
+                        datamod = Mid(OutString, j, 1) &amp; datamod
+                        CharsAdded = CharsAdded + 1
+                    End If
+                    'when the number of digits added to StringToCheck equals the weight value exit the for loop
+                    If CharsAdded = WeightValue Then
+                        Exit For
+                    End If
+                Next j
+                 '' MODU10
+                 M10OnlyCorrectData = ""
+                 M10StringLength = Len(datamod)
+                 'Check to make sure data is numeric and remove dashes, etc.
+                 For j = 1 To M10StringLength
+                    'Add all numbers to OnlyCorrectData string
+                     if IsNumeric(Mid(datamod, j, 1)) Then M10OnlyCorrectData = M10OnlyCorrectData &amp; Mid(datamod, j, 1)
+                 Next j
+                'Generate MOD 10 check digit
+                 M10Factor = 3
+                 M10WeightedTotal = 0
+                 M10StringLength = Len(M10OnlyCorrectData)
+                 For j = M10StringLength To 1 Step -1
+                'Get the value of each number starting at the end
+                'CurrentCharNum = Mid(M10NumberData, I, 1)
+                'Multiply by the weighting factor which is 3,1,3,1...
+                'and add the sum together
+                      M10WeightedTotal = M10WeightedTotal + (Val(Mid(M10OnlyCorrectData, j, 1)) * M10Factor)
+                      'Change factor for next calculation
+                      M10Factor = 4 - M10Factor
+                 Next j
+                'Find the CheckDigit by finding the smallest number that = a multiple of 10
+                 j = (M10WeightedTotal Mod 10)
+                 If j &lt;&gt; 0 Then
+                      CheckDigitValue = (10 - j)
+                 Else
+                      CheckDigitValue = 0
+                 End If
+                OutString = OutString &amp; ChrW(CheckDigitValue + 48)
+            elseif Mid(DataToEncode, i, 2) = "~f" Then
+    			'' ~fNN (MOD43 for HIBC)
+    			F43WeightTotal = 0
+                datamod = ""
+                CharsAdded = 0
+                For j = i-1 To 1 Step -1
+                    If InStr(F43Set, Mid(OutString, j, 1)) &gt; 0 Then
+                        datamod = Mid(OutString, j, 1) &amp; datamod
+                        CharsAdded = CharsAdded + 1
+                    End If
+                    'when the number of digits added to StringToCheck equals the weight value exit the for loop
+                    If CharsAdded = WeightValue Then
+                        Exit For
+                    End If
+                Next j
+                M10StringLength = Len(datamod)
+                For j = 1 To M10StringLength
+                    F43WeightTotal = F43WeightTotal + (InStr(F43Set, Mid(datamod, j, 1)) - 1)
+                Next j
+                F43WeightTotal = (F43WeightTotal Mod 43)
+                OutString = OutString &amp; Mid(F43Set, F43WeightTotal + 1, 1)
+            elseif (Mid(DataToEncode, i, 2) = "~i") Then
+    			'' ~iNN (MOD37 for ISBT)
+    			M37Correct = ""
+    			M37CharCode = 0
+    			M37CharValue = 0
+    			M37WeightTotal = 0
+    			M37CheckDigit = 0
+                datamod = ""
+                CharsAdded = 0
+                For j = i-1 To 1 Step -1
+                    M37CharCode = Asc(Mid(OutString, j, 1))
+                    If (M37CharCode &gt; 47 And M37CharCode &lt; 58) Or (M37CharCode &gt; 64 And M37CharCode &lt; 91) Then
+                        datamod = Mid(OutString, j, 1) &amp; datamod
+                        CharsAdded = CharsAdded + 1
+                    End If
+                    'when the number of digits added to StringToCheck equals the weight value exit the for loop
+                    If CharsAdded = WeightValue Then
+                        Exit For
+                    End If
+                Next j
+                M10StringLength = Len(datamod)
+                For j = 1 To M10StringLength
+                    M37CharCode = Asc(Mid(datamod, j, 1))
+                    '' 0-9
+                    If (M37CharCode &gt; 47 And M37CharCode &lt; 58) Then M37CharValue = M37CharCode - 48
+                    '' A-Z
+                    If (M37CharCode &gt; 64 And M37CharCode &lt; 591) Then M37CharValue = M37CharCode - 55
+
+                    M37WeightTotal = ((M37WeightTotal + M37CharValue) * 2) Mod 37
+                Next j
+    			M37CheckDigit = (38 - M37WeightTotal) Mod 37
+    			strTemp  = ""
+    			if (M37CheckDigit &lt; 10) then strTemp = Chr(M37CheckDigit + 48) '' 0-9
+    			if (M37CheckDigit &lt; 36 And M37CheckDigit &gt; 9) Then strTemp = Chr(M37CheckDigit + 55) '' A-Z
+    			if (M37CheckDigit = 36) Then strTemp = Chr(42)
+                OutString = OutString &amp; strTemp
+            end if
+            i = i + 3
+    Else
+           OutString = OutString &amp; Mid(DataToEncode, I, 1)
+        End If
+    Next I
+    DataToEncode = OutString
+End If
+DataToFormat = DataToEncode
+OnlyCorrectData = ""
+DataToEncode = ""
+DataToPrint = ""
+Dim SetC128() = { _
+"EFF", "FEF", "FFE", "BBG", "BCF", "CBF", "BFC", "BGB", "CFB", "FBC", _
+"FCB", "GBB", "AFJ", "BEJ", "BFI", "AJF", "BIF", "BJE", "FJA", "FAJ", _
+"FBI", "EJB", "FIB", "IEI", "IBF", "JAF", "JBE", "IFB", "JEB", "JFA", _
+"EEG", "EGE", "GEE", "ACG", "CAG", "CCE", "AGC", "CEC", "CGA", "ECC", _
+"GAC", "GCA", "AEK", "AGI", "CEI", "AIG", "AKE", "CIE", "IIE", "ECI", _
+"GAI", "EIC", "EKA", "EII", "IAG", "ICE", "KAE", "IEC", "IGA", "KEA", _
+"IMA", "FDA", "OAA", "ABH", "ADF", "BAH", "BDE", "DAF", "DBE", "AFD", _
+"AHB", "BED", "BHA", "DEB", "DFA", "HBA", "FAD", "MIA", "HAB", "CMA", _
+"ABN", "BAN", "BBM", "ANB", "BMB", "BNA", "MBB", "NAB", "NBA", "EEM", _
+"EME", "MEE", "AAO", "ACM", "CAM", "AMC", "AOA", "MAC", "MCA", "AIM", _
+"AMI", "IAM", "MAI", "EDB", "EBD", "EBJ"}
+'Here we select character set A, B or C for the START character
+'Start A = "EDB"
+'Start B = "EBD"
+'Start C = "EBJ"
+StringLength = Len(DataToFormat)
+CurrentCharNum = AscW(Mid(DataToFormat, 1, 1))
+'Set A?
+If CurrentCharNum &lt; 32 Then C128Start = "EDB"
+'Set B?
+If CurrentCharNum &gt; 31 And CurrentCharNum &lt; 127 Then C128Start = "EBD"
+If CurrentCharNum = 197 Then C128Start = "EBD"
+'Set C?
+If ((StringLength &gt; 3) And IsNumeric(Mid(DataToFormat, 1, 4))) Then C128Start = "EBJ"
+'202 &amp; 212-215 is for the FNC1, with this Start C is mandatory
+If CurrentCharNum = 202 Then C128Start = "EBJ"
+If CurrentCharNum &gt; 211 Then C128Start = "EBJ"
+If C128Start = "EDB" Then CurrentEncoding = "A"
+If C128Start = "EBD" Then CurrentEncoding = "B"
+If C128Start = "EBJ" Then CurrentEncoding = "C"
+For I = 1 To StringLength
+    CurrentCharNum = AscW(Mid(DataToFormat, I, 1))
+    'check for FNC1 in any set which is ASCII 202 and ASCII 212-219
+    If ((CurrentCharNum &gt; 201) And (CurrentCharNum &lt; 219)) Then
+        DataToEncode = DataToEncode &amp; ChrW(202)
+    'check for switching to character set C
+    ElseIf CurrentCharNum = 197 Then 
+        If CurrentEncoding = "C" Then 'switch to B
+            DataToEncode = DataToEncode &amp; ChrW(200)
+            CurrentEncoding = "B"
+        End If
+        DataToEncode = DataToEncode &amp; ChrW(197)
+    ElseIf ((I &lt; StringLength - 2) And (IsNumeric(Mid(DataToFormat, I, 1))) And (IsNumeric(Mid(DataToFormat, I + 1, 1))) And (IsNumeric(Mid(DataToFormat, I, 4)))) Or ((I &lt; StringLength) And (IsNumeric(Mid(DataToFormat, I, 1))) And (IsNumeric(Mid(DataToFormat, I + 1, 1))) And (CurrentEncoding = "C")) Then
+        'check to see if we have an odd number of numbers to encode,
+        'if so, stay in current set and then switch to save space
+        If CurrentEncoding &lt;&gt; "C" Then
+            J = I
+            Factor = 3
+            Do While J &lt;= StringLength And IsNumeric(Mid(DataToFormat, J, 1))
+                Factor = 4 - Factor
+                J = J + 1
+            Loop
+            If Factor = 1 Then
+                'if so stay in current set for 1 character to save space
+                DataToEncode = DataToEncode &amp; ChrW(CurrentCharNum)
+                I = I + 1
+            End If
+        End If
+        'switch to set C if not already in it
+        If CurrentEncoding &lt;&gt; "C" Then DataToEncode = DataToEncode &amp; ChrW(199)
+        CurrentEncoding = "C"
+        CurrentChar = Mid(DataToFormat, I, 2)
+        CurrentValue = Val(CurrentChar)
+        'set the CurrentValue to the number of String CurrentChar
+        DataToEncode = DataToEncode &amp; ChrW(CurrentValue + 32)
+        I = I + 1
+        'check for switching to character set A
+    ElseIf (I &lt;= StringLength) And ((AscW(Mid(DataToFormat, I, 1)) &lt; 31) Or ((CurrentEncoding = "A") And (AscW(Mid(DataToFormat, I, 1)) &gt; 32 And (AscW(Mid(DataToFormat, I, 1))) &lt; 96))) Then
+        'switch to set A if not already in it
+        If CurrentEncoding &lt;&gt; "A" Then DataToEncode = DataToEncode &amp; ChrW(201)
+        CurrentEncoding = "A"
+        'Get the ASCII value of the next character
+        CurrentCharNum = AscW(Mid(DataToFormat, I, 1))
+        If CurrentCharNum &lt; 32 Then
+            DataToEncode = DataToEncode &amp; ChrW(CurrentCharNum + 96)
+        ElseIf CurrentCharNum &gt; 32 Then
+            DataToEncode = DataToEncode &amp; ChrW(CurrentCharNum)
+        End If
+    'check for switching to character set B
+    ElseIf (I &lt;= StringLength) And (((AscW(Mid(DataToFormat, I, 1))) &gt; 31) And ((AscW(Mid(DataToFormat, I, 1)))) &lt; 127) Then
+        'switch to set B if not already in it
+        If CurrentEncoding &lt;&gt; "B" Then DataToEncode = DataToEncode &amp; ChrW(200)
+        CurrentEncoding = "B"
+        'Get the ASCII value of the next character
+        CurrentCharNum = AscW(Mid(DataToFormat, I, 1))
+        DataToEncode = DataToEncode &amp; ChrW(CurrentCharNum)
+    End If
+Next I
+'&lt;&lt;&lt; Calculate Modulo 103 Check Digit &gt;&gt;&gt;
+If C128Start = "EDB" Then WeightedTotal = 103 'CurrentEncoding = "A"
+If C128Start = "EBD" Then WeightedTotal = 104 'CurrentEncoding = "B"
+If C128Start = "EBJ" Then WeightedTotal = 105 'CurrentEncoding = "C"
+StringLength = Len(DataToEncode)
+For I = 1 To StringLength
+    CurrentCharNum = AscW(Mid(DataToEncode, I, 1))
+    If CurrentCharNum &lt; 135 Then CurrentValue = CurrentCharNum - 32
+    If CurrentCharNum &gt; 134 Then CurrentValue = CurrentCharNum - 100
+    If CurrentCharNum = 194 Then CurrentValue = 0
+    PrintableString = PrintableString &amp; SetC128(CurrentValue + ArrayBase)
+    CurrentValue = CurrentValue * I
+    WeightedTotal = WeightedTotal + CurrentValue
+Next I
+CheckDigitValue = (WeightedTotal Mod 103)
+DataToEncode = ""
+'GIAH produces the stop character.
+DataToPrint = C128Start &amp; PrintableString &amp; SetC128(CheckDigitValue + ArrayBase) &amp; "GIAH"
+'Universal to SymbolString conversion
+'At this point in the code, DataToPrint is the entire barcode string for the Universal Font
+SymbolString = ""
+StringLength = Len(DataToPrint)
+For I = 1 To StringLength
+    'Get the value of each
+    CurrentCharNum = AscW(Mid(DataToPrint, I, 1))
+    If CurrentCharNum &gt;= 65 And CurrentCharNum &lt;= 68 Then SymbolString = SymbolString &amp; (11+(CurrentCharNum - 65))
+    If CurrentCharNum &gt;= 69 And CurrentCharNum &lt;= 72 Then SymbolString = SymbolString &amp; (21+(CurrentCharNum - 69))
+    If CurrentCharNum &gt;= 73 And CurrentCharNum &lt;= 76 Then SymbolString = SymbolString &amp; (31+(CurrentCharNum - 73))
+    If CurrentCharNum &gt;= 77 And CurrentCharNum &lt;= 80 Then SymbolString = SymbolString &amp; (41+(CurrentCharNum - 77))
+    If CurrentCharNum &gt;= 87 And CurrentCharNum &lt;= 88 Then SymbolString = SymbolString &amp; (11+(CurrentCharNum - 87))
+    If CurrentCharNum &gt;= 89 And CurrentCharNum &lt;= 90 Then SymbolString = SymbolString &amp; (21+(CurrentCharNum - 89))
+Next I
+'SymbolString to Native Conversion
+'At this point in the code, SymbolString is the entire barcode string in number form
+'For example: 211214142112214121221114311321211232
+'Convert SymbolString to PrintableString
+Dim ww As String
+Dim wb As String
+Dim bw As String
+Dim bb As String
+ww = ChrW(32) 'SPACE
+If MonoSpaceFont = False Then ww = ChrW(32) &amp; ChrW(32) &amp; ChrW(32)
+wb = ChrW(9616)
+bw = ChrW(9612)
+bb = ChrW(9608)
+CurrentValue = 0
+PrintableString = ""
+Dim NextDigitUsed As Integer
+Dim StartOver As Integer
+NextDigitUsed = 0
+Factor = 3
+Dim SymbolStringLength
+SymbolStringLength = Len(SymbolString) - 1
+For I = 1 To SymbolStringLength
+    CurrentValue = Val(Mid(SymbolString, I, 1))
+    If NextDigitUsed = 1 Then 
+        'Because the next digit is used, remove 1 from CurrentValue
+        'unless CurrentValue is already 1
+        If CurrentValue &gt; 1 then
+            CurrentValue = CurrentValue - 1
+            NextDigitUsed = 0
+        Else
+            'CurrentValue was used in a previous step
+            NextDigitUsed = 1
+        End If
+    End If
+    If NextDigitUsed = 1 And CurrentValue = 1 Then
+        'There is nothing more here to do because the CurrentValue 
+        'was used in a previous step
+        NextDigitUsed = 0
+    Else
+        For J = 1 to CurrentValue
+            If J = CurrentValue Then
+                NextDigitUsed = 1
+                'We are at the end of the bar segment, borrow 1 segment from the next 
+                If Factor = 3 Then PrintableString = PrintableString &amp; bw
+                If Factor = 1 Then PrintableString = PrintableString &amp; wb
+            Else
+                NextDigitUsed = 0
+                If Factor = 3 Then PrintableString = PrintableString &amp; bb
+                If Factor = 1 Then PrintableString = PrintableString &amp; ww
+                J = J+1
+            End If
+        Next J
+    End If
+    Factor = 4 - Factor
+Next I
+For I = 1 to BarHeight
+    Formula = Formula &amp; ChrW(10) &amp; ChrW(13) &amp; PrintableString
+Next I
+IDAutomation_SSRS_Code128 = Formula
+
+ Catch ex As Exception
+     IDAutomation_SSRS_Code128 = "ERROR" &amp; " - " &amp; ex.Message
+ End Try
+
+End Function
+
+Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+
+
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="Serial_No_">
+          <DataField>Serial_No_</DataField>
+        </Field>
+        <Field Name="Document_No_">
+          <DataField>Document_No_</DataField>
+        </Field>
+        <Field Name="DocumentLine_No_">
+          <DataField>DocumentLine_No_</DataField>
+        </Field>
+        <Field Name="Line_No_">
+          <DataField>Line_No_</DataField>
+        </Field>
+        <Field Name="Item_No_">
+          <DataField>Item_No_</DataField>
+        </Field>
+        <Field Name="ItemDesc">
+          <DataField>ItemDesc</DataField>
+        </Field>
+        <Field Name="ShipToPostCode">
+          <DataField>ShipToPostCode</DataField>
+        </Field>
+        <Field Name="ShipTo_Add1">
+          <DataField>ShipTo_Add1</DataField>
+        </Field>
+        <Field Name="ShipTo_Add2">
+          <DataField>ShipTo_Add2</DataField>
+        </Field>
+        <Field Name="ShipTo_Add3">
+          <DataField>ShipTo_Add3</DataField>
+        </Field>
+        <Field Name="ShipTo_Add4">
+          <DataField>ShipTo_Add4</DataField>
+        </Field>
+        <Field Name="ShipTo_Add5">
+          <DataField>ShipTo_Add5</DataField>
+        </Field>
+        <Field Name="ShipFrm_LocAdd5">
+          <DataField>ShipFrm_LocAdd5</DataField>
+        </Field>
+        <Field Name="ShipFrm_LocAdd1">
+          <DataField>ShipFrm_LocAdd1</DataField>
+        </Field>
+        <Field Name="ShipFrm_LocAdd2">
+          <DataField>ShipFrm_LocAdd2</DataField>
+        </Field>
+        <Field Name="ShipFrm_LocAdd3">
+          <DataField>ShipFrm_LocAdd3</DataField>
+        </Field>
+        <Field Name="ShipFrm_LocAdd4">
+          <DataField>ShipFrm_LocAdd4</DataField>
+        </Field>
+        <Field Name="Encoded_Postcode">
+          <DataField>Encoded_Postcode</DataField>
+        </Field>
+        <Field Name="Encoded_SSCCODE">
+          <DataField>Encoded_SSCCODE</DataField>
+        </Field>
+        <Field Name="Shipping_Agent_Code">
+          <DataField>Shipping_Agent_Code</DataField>
+        </Field>
+        <Field Name="Ship_Agent_Desc">
+          <DataField>Ship_Agent_Desc</DataField>
+        </Field>
+        <Field Name="External_Document_No_">
+          <DataField>External_Document_No_</DataField>
+        </Field>
+        <Field Name="Type">
+          <DataField>Type</DataField>
+        </Field>
+        <Field Name="Dept">
+          <DataField>Dept</DataField>
+        </Field>
+        <Field Name="SpeRefVAlue">
+          <DataField>SpeRefVAlue</DataField>
+        </Field>
+        <Field Name="SpeRefCap">
+          <DataField>SpeRefCap</DataField>
+        </Field>
+        <Field Name="CasePackQty">
+          <DataField>CasePackQty</DataField>
+        </Field>
+        <Field Name="CasePackQtyFormat">
+          <DataField>CasePackQtyFormat</DataField>
+        </Field>
+        <Field Name="Carton">
+          <DataField>Carton</DataField>
+        </Field>
+        <Field Name="CartonFormat">
+          <DataField>CartonFormat</DataField>
+        </Field>
+        <Field Name="LineCount">
+          <DataField>LineCount</DataField>
+        </Field>
+        <Field Name="TOtalcount">
+          <DataField>TOtalcount</DataField>
+        </Field>
+        <Field Name="BarcodeString2">
+          <DataField>BarcodeString2</DataField>
+        </Field>
+        <Field Name="BarcodeString">
+          <DataField>BarcodeString</DataField>
+        </Field>
+        <Field Name="shiptoPrefix">
+          <DataField>shiptoPrefix</DataField>
+        </Field>
+        <Field Name="SCAC">
+          <DataField>SCAC</DataField>
+        </Field>
+        <Field Name="BOL">
+          <DataField>BOL</DataField>
+        </Field>
+        <Field Name="ProNo">
+          <DataField>ProNo</DataField>
+        </Field>
+        <Field Name="ShiptToCode">
+          <DataField>ShiptToCode</DataField>
+        </Field>
+        <Field Name="UPCCode">
+          <DataField>UPCCode</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

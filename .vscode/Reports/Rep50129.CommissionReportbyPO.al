@@ -1,0 +1,499 @@
+report 50129 "Commission Report by PO"
+{
+    ApplicationArea = All;
+    Caption = 'Commission Report By PO Invoice';
+    UsageCategory = ReportsAndAnalysis;
+    DefaultLayout = RDLC;
+    RDLCLayout = './.vscode/ReportLayout/CommissionReportByPOInvoice.rdl';
+
+    dataset
+    {
+        dataitem(TmpCommission; TmpCommission)
+        {
+            DataItemTableView = sorting(CustNo, Type, DatePaid, InvoiceNo, ItemNo);
+
+            column(DatePaid; DatePaid)
+            {
+            }
+            column(InvoiceNo; InvoiceNo)
+            {
+
+            }
+            column(ItemDescription; Description)
+            {
+
+            }
+            column(CustNo; CustNo)
+            {
+            }
+            column(ExtDocNo; ExtDocNo)
+            {
+            }
+            column(Type; "Type")
+            {
+            }
+            column(CustName; Customer.Name)
+            {
+            }
+            column(ItemNo; ItemNo)
+            {
+            }
+            column(Description; Description)
+            {
+            }
+            column(Qty; Qty)
+            {
+            }
+            column(SalesPrice; SalesPrice)
+            {
+            }
+            column(OriginalAmount; OriginalAmount)
+            {
+            }
+            column(PaidAmount; PaidAmount)
+            {
+            }
+            column(CashPaidAmount; CashPaidAmount)
+            {
+            }
+            column(OrderNo; OrderNo)
+            {
+
+            }
+            column(bCashPaidNotEq; bCashPaidNotEq)
+            {
+
+            }
+            column(ItemSort; ItemSort)
+            {
+
+            }
+            column(UserID; UserID)
+            {
+
+            }
+            column(CMAmount; CMAmount)
+            {
+
+            }
+
+            trigger OnAfterGetRecord()
+            begin
+                If Customer.get(TmpCommission.CustNo) then;
+
+            end;
+
+            trigger OnPreDataItem()
+            begin
+                TmpCommission.SETFILTER(Type, '%1|%2', 'Invoice', 'PmtDisc');
+                TmpCommission.SetRange(UserID, UserID);
+            end;
+
+        }
+    }
+    requestpage
+    {
+        layout
+        {
+            area(Content)
+            {
+                group(Criteria)
+                {
+                    Caption = 'Report Filter';
+                    field(StartDate; StartDate)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Start Date';
+                    }
+                    field(EndDate; EndDate)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'End Date';
+                    }
+                    field(GetCustNo; GetCustNo)
+                    {
+                        Caption = 'Customer No.';
+                        ApplicationArea = All;
+                        TableRelation = Customer."No.";
+                    }
+                }
+            }
+        }
+        actions
+        {
+            area(Processing)
+            {
+            }
+        }
+
+    }
+
+    var
+        test: boolean;
+        StartDate: Date;
+        EndDate: Date;
+        GetSumCommission: Record TmpCommissionSum;
+        Customer: Record Customer;
+        Item: Record Item;
+        lblDiscountAllowance: Label '%1 Invoice Discount/Allowance';
+        lblChargeback: Label '**%1 Chargeback**';
+        GetCustNo: Code[20];
+        ErrNoDataFound: Label 'No data found.  Please check your parameters.';
+
+
+    trigger OnPreReport()
+    var
+        ILE: Record "Item Ledger Entry";
+        CBGLE: Record "SIMC Cash G/L Entry";
+        ChkCBGLE: Record "SIMC Cash G/L Entry";
+        GetAmount: Decimal;
+        SalesInvHdr: Record "Sales Invoice Header";
+        SalesInvLn: Record "Sales Invoice Line";
+        InsTmpCommission: Record TmpCommission;
+        CLE: Record "Cust. Ledger Entry";
+        GetDescrip: Text;
+        ChkTmpCommission: Record TmpCommission;
+        GetTotal: Decimal;
+        SalesCM: Record "Sales Cr.Memo Header";
+        SalesCMLine: Record "Sales Cr.Memo Line";
+        totalCashPaid: Decimal;
+        DetCLE: Record "Detailed Cust. Ledg. Entry";
+        SRSetup: Record "Sales & Receivables Setup";
+        GetInvTotalB4Disc: Decimal;
+    begin
+
+        if SRSetup.Find() then;
+
+        TmpCommission.Reset();
+        TmpCommission.SetRange(UserID, UserId);
+        If TmpCommission.FindSet() then
+            TmpCommission.DeleteAll();
+
+        InsTmpCommission.Reset();
+        InsTmpCommission.SetRange(UserID, UserId);
+        If InsTmpCommission.FindSet() then
+            InsTmpCommission.DeleteAll();
+
+        GetSumCommission.Reset();
+        GetSumCommission.SetRange(UserID, UserId);
+        If GetSumCommission.FindSet() then
+            GetSumCommission.DeleteAll();
+
+        ChkTmpCommission.Reset();
+        ChkTmpCommission.SetRange(UserID, UserId);
+        If ChkTmpCommission.FindSet() then
+            ChkTmpCommission.DeleteAll();
+
+
+
+
+        CBGLE.Reset();
+        CBGLE.SetRange("Posting Date", StartDate, EndDate);
+        CBGLE.SetRange("Document Type", CBGLE."Document Type"::"Sales Invoice");
+        CBGLE.SetRange("Source Type", CBGLE."Source Type"::Customer);
+        // CBGLE.SetRange("Document No.", '25100639');  //mbr test - for testing purposes only
+        CBGLE.SetFilter("Document Posting Date", '>=%1', SRSetup.InvoiceEarliestDate);
+        if StrLen(GetCustNo) > 0 then
+            CBGLE.SetRange("Source No.", GetCustNo);
+        CBGLE.SetRange("Applied Document Type", CBGLE."Applied Document Type"::Payment);
+        CBGLE.SetRange("G/L Account No.", '40200');
+
+
+
+        IF CBGLE.FindSet() then
+            repeat
+                GetAmount := 0;
+                ChkCBGLE.Reset();
+                ChkCBGLE.SetRange("Document Type", CBGLE."Document Type");
+                ChkCBGLE.SetRange("Source No.", CBGLE."Source No.");
+                ChkCBGLE.SetRange("Document No.", CBGLE."Document No.");
+                ChkCBGLE.SetRange("Posting Date", StartDate, EndDate);
+                ChkCBGLE.SetRange("Applied Document Type", ChkCBGLE."Applied Document Type"::Payment);
+                //ChkCBGLE.SetRange("G/L Account No.", '40200'); - DO NOT exempt any
+
+                if ChkCBGLE.FindSet() then
+                    repeat
+                        // GetAmount := GetAmount + ChkCBGLE.Amount;
+                        If ChkCBGLE."Credit Amount" > 0 then
+                            GetAmount := GetAmount + ChkCBGLE."Credit Amount"
+                        else
+                            GetAmount := GetAmount - ChkCBGLE."Debit Amount";
+
+
+                    until ChkCBGLE.Next() = 0;
+
+                //mbr 6/24/25 - we will now include early payment discount by getting it from CLE
+                //now, let's add any early payment discount amounts which is in the CLE.  In Cash Basis LE, this is recorded in the G/L 40300 account
+                CLE.Reset();
+                CLE.SetRange("Document No.", CBGLE."Document No.");
+                CLE.SetRange("Document Type", CLE."Document Type"::Invoice);
+                CLE.SetRange("Customer No.", CBGLE."Source No.");
+                CLE.SetFilter("Pmt. Disc. Given (LCY)", '>%1', 0);
+                IF CLE.FindFirst() then
+                    GetAmount := GetAmount - CLE."Pmt. Disc. Given (LCY)";
+                //mbr 6/24/25 - end
+                GetSumCommission.Reset();
+                GetSumCommission.SetRange(Type, 'InvoiceTotal');
+                GetSumCommission.SetRange(InvoiceNo, CBGLE."Document No.");
+                GetSumCommission.SetRange(CustNo, CBGLE."Source No.");
+                GetSumCommission.SetRange(UserID, UserId);
+
+                If NOT GetSumCommission.FindFirst() then begin
+                    GetSumCommission.Init();
+                    GetSumCommission.CustNo := CBGLE."Source No.";
+                    GetSumCommission.Type := 'InvoiceTotal';
+                    GetSumCommission.CashPaidAmount := GetAmount;
+                    GetSumCommission.InvoiceNo := CBGLE."Document No.";
+                    GetSumCommission.DatePaid := CBGLE."Posting Date";
+                    GetSumCommission.UserID := UserId;
+                    GetSumCommission.AppliedDocNo := CBGLE."Applied Document No.";
+                    GetSumCommission.Insert;
+                end;
+            until CBGLE.Next() = 0
+        else
+            Error(ErrNoDataFound);
+
+        //update the corresponding Sales Order No
+        GetSumCommission.reset;
+        GetSumCommission.SetRange(UserID, UserId);
+        IF GetSumCommission.FindSet() then
+            repeat
+                SalesInvHdr.Reset();
+                SalesInvHdr.SetRange("No.", GetSumCommission.InvoiceNo);
+                If SalesInvHdr.FindFirst() then begin
+                    GetSumCommission.OrderNo := SalesInvHdr."Order No.";
+
+                    GetSumCommission.Modify();
+                end;
+            until GetSumCommission.Next() = 0;
+
+
+        GetSumCommission.reset;
+        GetSumCommission.SetRange(UserID, UserId);
+        GetSumCommission.SetRange(Type, 'InvoiceTotal');
+        IF GetSumCommission.FindSet() then
+            repeat
+                if STRLEN(GetSumCommission.OrderNo) > 0 then begin
+
+
+
+                    ILE.Reset();
+                    ILE.SetRange("Entry Type", ILE."Entry Type"::Sale);
+                    ILE.SetRange("Source Type", ILE."Source Type"::Customer);
+                    ILE.SetRange("Sales Shipment Source No.", GetSumCommission.OrderNo);
+                    ILE.SetRange("Source No.", GetSumCommission.CustNo);
+
+                    IF ILE.FindSet() then
+                        repeat
+                            ILE.CalcFields("Sales Amount (Actual)", "Sales Shipment Source No.");
+                            TmpCommission.Reset();
+                            TmpCommission.SetRange(UserID, UserId);
+                            TmpCommission.SetRange(Type, 'Invoice');
+                            TmpCommission.SetRange(CustNo, ILE."Source No.");
+                            TmpCommission.SetRange(InvoiceNo, GetSumCommission.InvoiceNo);
+
+                            TmpCommission.SetRange(ItemNo, ILE."Item No.");
+                            TmpCommission.SetRange(UserID, UserId);
+
+                            If TmpCommission.FindFirst() then begin
+                                TmpCommission.Qty := TmpCommission.Qty + Abs(ILE."Invoiced Quantity");
+                                TmpCommission.OriginalAmount := TmpCommission.OriginalAmount + ILE."Sales Amount (Actual)";
+                                TmpCommission.PaidAmount := TmpCommission.PaidAmount + ILE."Sales Amount (Actual)";
+                                TmpCommission.Modify(true);
+                            end
+                            else begin
+                                TmpCommission.Init();
+                                TmpCommission.Type := 'Invoice';
+                                TmpCommission.CustNo := ILE."Source No.";
+                                TmpCommission.ExtDocNo := ILE."External Document No.";
+                                TmpCommission.InvoiceNo := GetSumCommission.InvoiceNo;
+                                TmpCommission.OrderNo := GetSumCommission.OrderNo;
+                                TmpCommission.InvDiscExists := GetSumCommission.InvDiscExists;
+                                TmpCommission.ItemNo := ILE."Item No.";
+                                If Item.get(TmpCommission.ItemNo) then
+                                    TmpCommission.Description := Item.Description;
+                                TmpCommission.Qty := Abs(ILE."Invoiced Quantity");
+                                TmpCommission.UserID := UserId;
+                                TmpCommission.PaidAmount := ILE."Sales Amount (Actual)";
+                                TmpCommission.DatePaid := GetSumCommission.DatePaid;
+                                TmpCommission.OrderNo := ILE."Sales Shipment Source No.";
+                                TmpCommission.InvDiscExists := GetSumCommission.InvDiscExists;
+                                TmpCommission.ItemSort := 0;
+                                TmpCommission.AppliedDocNo := GetSumCommission.AppliedDocNo;
+                                TmpCommission.Insert();
+                            end;
+
+
+                        until ILE.Next() = 0;
+                end;
+
+            until GetSumCommission.Next() = 0;
+
+
+
+        //update the originalamount by going to each Posted Sales Line
+        TmpCommission.Reset();
+        TmpCommission.SetRange(UserID, UserId);
+        TmpCommission.SetRange(Type, 'Invoice');
+        If TmpCommission.FindSet() then
+            repeat
+                SalesInvLn.Reset();
+                SalesInvLn.SetRange("Document No.", TmpCommission.InvoiceNo);
+                SalesInvLn.SetRange(Type, SalesInvLn.Type::Item);
+                SalesInvLn.SetRange("No.", TmpCommission.ItemNo);
+                If SalesInvLn.FindFirst() then begin
+                    TmpCommission.OriginalAmount := SalesInvLn."Line Amount";
+                    If TmpCommission.Qty > 0 then
+                        TmpCommission.SalesPrice := TmpCommission.OriginalAmount / TmpCommission.Qty;
+                    //mbr 6/24/25 - commented this out for now as per Jimmy we want to include the CMs applied
+                    //against each item and do not need the original invoice amount
+                    //           If TmpCommission.InvDiscExists = true then
+                    //                TmpCommission.PaidAmount := TmpCommission.OriginalAmount;
+                    //mbr 6/24/25 - end of commented code
+                    TmpCommission.Modify();
+                end;
+            until TmpCommission.Next() = 0;
+
+
+        //Let's make sure paid amount is adjusted with what was actually applied in terms of payment
+        //If not equal then use below formula:
+        //Formula: Paid Amount = ([Cash (or Payment) Received Amount]/[Total Invoice Amount]) * ([Item Line Amount] 
+
+
+        GetSumCommission.Reset();
+        GetSumCommission.SetRange(UserID, UserId);
+        GetSumCommission.SetRange(Type, 'InvoiceTotal');
+        If GetSumCommission.FindSet() then
+            repeat
+                GetAmount := 0;
+                GetTotal := 0;
+                totalCashPaid := 0;
+                GetInvTotalB4Disc := 0;
+
+                //Calculate Inv Total before any discounts are taken (except pmt disc)
+                //mbr 6/24/25 - Correction - we will now total the Invoice amount by actually 
+                //summing up total invoice amount charged to customers.  This means we are including any discounts
+                //given and CMs given.  We will take from ILE.Sales Amount Actual (value entries) instead.
+                ChkTmpCommission.Reset();
+                ChkTmpCommission.SetRange(UserID, UserId);
+                ChkTmpCommission.SetRange(Type, 'Invoice');
+                ChkTmpCommission.SetRange(InvoiceNo, GetSumCommission.InvoiceNo);
+                ChkTmpCommission.SetRange(CustNo, GetSumCommission.CustNo);
+                ChkTmpCommission.SetFilter(ItemNo, '<>%1&<>%2', 'DISC', 'PMTDISC');
+                if ChkTmpCommission.FindSet() then
+                    repeat
+                        //mbr 6/24/25 - Correction - start
+                        //GetInvTotalB4Disc := GetInvTotalB4Disc + ChkTmpCommission.OriginalAmount;
+                        GetInvTotalB4Disc := GetInvTotalB4Disc + ChkTmpCommission.PaidAmount;
+                        ;
+                    //mbr 6/24/25 - Correction - end
+                    until ChkTmpCommission.Next() = 0;
+
+                totalCashPaid := Round(GetSumCommission.CashPaidAmount, 0.01);
+
+
+                ChkTmpCommission.Reset();
+                ChkTmpCommission.SetRange(UserID, UserId);
+                ChkTmpCommission.SetRange(Type, 'Invoice');
+                ChkTmpCommission.SetRange(InvoiceNo, GetSumCommission.InvoiceNo);
+                ChkTmpCommission.SetRange(CustNo, GetSumCommission.CustNo);
+                ChkTmpCommission.SetFilter(ItemNo, '<>%1&<>%2', 'DISC', 'PMTDISC');
+                if ChkTmpCommission.FindSet() then
+                    repeat
+                        GetAmount := GetAmount + abs(Round(ChkTmpCommission.PaidAmount, 0.01));   //mbr DO NOT INCLUDE DISCOUNT or PMTDISC
+                    until ChkTmpCommission.Next() = 0;
+                if GetAmount <> totalCashPaid then begin
+
+                    SalesInvHdr.Reset();
+                    SalesInvHdr.SetRange("No.", GetSumCommission.InvoiceNo);
+                    SalesInvHdr.SetRange("Sell-to Customer No.", GetSumCommission.CustNo);
+                    If SalesInvHdr.findfirst then begin
+                        SalesInvHdr.CalcFields(Amount);
+                        //Let's update the paid amount to actdual payment applied 
+                        ChkTmpCommission.Reset();
+                        ChkTmpCommission.SetRange(UserID, UserId);
+                        ChkTmpCommission.SetRange(Type, 'Invoice');
+                        ChkTmpCommission.SetRange(InvoiceNo, GetSumCommission.InvoiceNo);
+                        ChkTmpCommission.SetRange(CustNo, GetSumCommission.CustNo);
+                        ChkTmpCommission.SetFilter(ItemNo, '<>%1&<>%2', 'DISC', 'PMTDISC');
+                        if ChkTmpCommission.FindSet() then
+                            repeat
+                                //Formula: Paid Amount = ([Cash (or Payment) Received Amount]/[Total Invoice Amount]) * ([Item Line Amount] 
+
+                                IF (GetInvTotalB4Disc) > 0 then begin
+                                    //mbr 6/24/25 - we will use the final Invoice amount after any Cms are applied by taking the ILE.Sales Amount Actual
+                                    //this is reflected into chkTmpCommission.PaidAmount
+                                    //ChkTmpCommission.PaidAmount := (totalCashPaid / GetInvTotalB4Disc) * ChkTmpCommission.OriginalAmount;
+                                    ChkTmpCommission.PaidAmount := (totalCashPaid / GetInvTotalB4Disc) * ChkTmpCommission.PaidAmount;
+                                    //mbr 6/24/25 - end of PaidAmount Correction
+                                    ChkTmpCommission.Modify();
+                                end
+
+                            until ChkTmpCommission.Next() = 0;
+                    end;
+                end;
+            until GetSumCommission.Next() = 0;
+
+
+        //update External Doc No if need be
+        TmpCommission.Reset();
+        TmpCommission.SetRange(UserID, UserId);
+        TmpCommission.SetRange(Type, 'Invoice');
+        TmpCommission.SetFilter(ExtDocNo, '=%1', '');
+        TmpCommission.SetFilter(InvoiceNo, '<>%1', '');
+        IF TmpCommission.FindSet() then
+            repeat
+                SalesInvHdr.Reset();
+                SalesInvHdr.SetRange("No.", TmpCommission.InvoiceNo);
+                If SalesInvHdr.FindFirst() then begin
+                    TmpCommission.ExtDocNo := SalesInvHdr."External Document No.";
+                    TmpCommission.Modify();
+                end;
+            until TmpCommission.Next() = 0;
+        //mbr 6/24/25 - we no longer need to add 40300 breakdown; we are now subtracting early payment discount
+        //directly from CLE.discount amount given
+        //now, let's find out if there's any early payment discount applied against the payment
+        //CBGLE.Reset();
+        //CBGLE.SetRange("Posting Date", StartDate, EndDate);
+        //CBGLE.SetRange("Source Type", CBGLE."Source Type"::Customer);
+        //if StrLen(GetCustNo) > 0 then
+        //    CBGLE.SetRange("Source No.", GetCustNo);
+        //CBGLE.SetRange("Applied Document Type", CBGLE."Applied Document Type"::Payment);
+        //CBGLE.SetRange("G/L Account No.", '40300');
+        //IF CBGLE.FindSet() then
+        //    Repeat
+        //        InsTmpCommission.RESET;
+        //        InsTmpCommission.SETRANGE(UserID, UserID);
+        //        InsTmpCommission.SetRange(CustNo, CBGLE."Source No.");
+        //        InsTmpCommission.SetRange(DatePaid, CBGLE."Posting Date");
+        //        InsTmpCommission.SetRange(InvoiceNo, CBGLE."Document No.");
+        //        InsTmpCommission.SetRange(ItemNo, 'PMTDISC');
+        //        InsTmpCommission.SetRange(AppliedDocNo, CBGLE."Applied Document No.");
+        //        If InsTmpCommission.FindFirst() then begin
+        //           InsTmpCommission.PaidAmount += CBGLE.Amount * -1;
+        //           InsTmpCommission.Modify();
+        //      end
+        //      else begin
+        //          InsTmpCommission.Init();
+        //          InsTmpCommission.CustNo := CBGLE."Source No.";
+        //          InsTmpCommission.CashPaidAmount := 0;
+        //          InsTmpCommission.InvoiceNo := CBGLE."Document No.";
+        //          InsTmpCommission.DatePaid := CBGLE."Posting Date";
+        //          InsTmpCommission.UserID := UserId;
+        //          InsTmpCommission.OriginalAmount := 0;
+        //          InsTmpCommission.PaidAmount := CBGLE.Amount * -1;
+        //         InsTmpCommission.Description := 'Early Payment Discount';
+        //         InsTmpCommission.Type := 'PmtDisc';
+        //         InsTmpCommission.ItemNo := 'PMTDISC';
+        //         InsTmpCommission.ItemSort := 3;
+        //         InsTmpCommission.AppliedDocNo := CBGLE."Applied Document No.";
+        //         InsTmpCommission.Insert();
+        //     end;
+
+        // Until CBGLE.Next() = 0;
+
+
+
+    end;
+}
+

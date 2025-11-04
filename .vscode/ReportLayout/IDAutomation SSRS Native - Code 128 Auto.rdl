@@ -1,0 +1,632 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:cl="http://schemas.microsoft.com/sqlserver/reporting/2010/01/componentdefinition" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition">
+  <AutoRefresh>0</AutoRefresh>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Textbox Name="Textbox1">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Code.IDAutomation_SSRS_Code128("IDAutomation")</Value>
+                    <Style>
+                      <FontFamily>Lucida Console</FontFamily>
+                      <FontSize>4pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>1.72792in</Top>
+            <Left>0.16542in</Left>
+            <Height>0.57764in</Height>
+            <Width>4.62625in</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Image Name="Image2">
+            <Source>Embedded</Source>
+            <Value>idautomation</Value>
+            <Sizing>FitProportional</Sizing>
+            <ActionInfo>
+              <Actions>
+                <Action>
+                  <Hyperlink>https://www.idautomation.com/</Hyperlink>
+                </Action>
+              </Actions>
+            </ActionInfo>
+            <Top>0.12152in</Top>
+            <Left>0.16542in</Left>
+            <Height>0.625in</Height>
+            <Width>4.62625in</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Textbox Name="Textbox2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Native Barcode Generator for SSRS</Value>
+                    <Style>
+                      <FontFamily>Verdana</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <ActionInfo>
+              <Actions>
+                <Action>
+                  <Hyperlink>https://www.idautomation.com/barcode-components/ssrs-generator/</Hyperlink>
+                </Action>
+              </Actions>
+            </ActionInfo>
+            <Top>0.7743in</Top>
+            <Left>0.16542in</Left>
+            <Height>0.25in</Height>
+            <Width>4.62625in</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox3">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>The code used in this report is the complete barcode generator, which stays embedded in the report. No other components need to be installed to generate barcode symbols with this product.</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Verdana</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox3</rd:DefaultName>
+            <ActionInfo>
+              <Actions>
+                <Action>
+                  <Hyperlink>https://www.idautomation.com/barcode-components/ssrs-generator/</Hyperlink>
+                </Action>
+              </Actions>
+            </ActionInfo>
+            <Top>1.07986in</Top>
+            <Left>0.16542in</Left>
+            <Height>0.5in</Height>
+            <Width>5.83458in</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <Height>2.44792in</Height>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Body>
+      <Width>6in</Width>
+      <Page>
+        <PageFooter>
+          <Height>0.59583in</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="ExecutionTime">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Globals!ExecutionTime</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>ExecutionTime</rd:DefaultName>
+              <Top>0.2in</Top>
+              <Left>4in</Left>
+              <Height>0.25in</Height>
+              <Width>2in</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+          </ReportItems>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageFooter>
+        <LeftMargin>1in</LeftMargin>
+        <RightMargin>1in</RightMargin>
+        <TopMargin>1in</TopMargin>
+        <BottomMargin>1in</BottomMargin>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>'*********************************************************************
+'*  Native Barcode Generator for SSRS
+'*  Version 2018
+'*  Copyright, IDAutomation.com, Inc. All rights reserved.
+'*  USA Patent 7,637,436
+'*
+'*  Code 128 Auto
+'*  Example: =code.IDAutomation_SSRS_Code128(Fields!Product_ID.Value)
+'*
+'*  Use the system font: Lucida Console at 4 points
+'*
+'*
+'*  You may incorporate this Source Code in your application
+'*  only if you own a valid license from IDAutomation.com, Inc.
+'*  for the associated product and the copyright notices are not
+'*  removed from the source code.
+'*
+'*  Distributing this source code outside your
+'*  organization requires a Developer License.
+'*********************************************************************
+
+Public Function IDAutomation_SSRS_Code128(DataToEncode As String, Optional BarHeight As Integer =8,Optional ApplyTilde As Boolean = True) As String
+'Change MonoSpaceFont to equal False when not using a mono-spaced font
+'such as Courier New. Barcodes may not be completely accurate when using 
+'proportional fonts.
+
+Try
+
+Dim MonoSpaceFont As Boolean
+Dim Formula As String
+MonoSpaceFont = True
+Dim DataToPrint as String
+Dim WeightedTotal As Integer
+Dim SymbolString As String
+Dim StringLength As Integer
+StringLength = Len(DataToEncode)
+Dim CurrentCharNum As Integer
+Dim CurrentValue As Integer
+Dim WeightValue As Integer
+Dim NumCharsTaken As Integer
+Dim CheckDigitValue As Integer
+Dim PrintableString As String
+Dim Factor As Integer
+Dim I As Integer
+Dim J As Integer
+Dim CorrectFNC As Integer
+Dim nwPattern As String
+Dim OnlyCorrectData As String
+Dim OnlyNumberData As String
+Dim OnlyNumberDataRev As String
+Dim DataToFormat As String
+Dim C128Start As String
+Dim OutString As String 
+Dim datamod As String 
+Dim CharsAdded As Integer
+Dim StringToCheck As String
+Dim M10StringLength As Integer
+Dim M10OnlyCorrectData As String
+Dim M10Factor As Integer
+Dim M10WeightedTotal As Integer
+Dim M10CheckDigit As Integer
+Dim F43WeightTotal As Integer
+Dim strTemp as String 
+Dim F43Set as String
+Dim M37Correct as String
+Dim M37CharCode As Integer
+Dim M37CharValue As Integer
+Dim M37WeightTotal As Integer
+Dim M37CheckDigit As Integer
+PrintableString = ""
+Formula = ""
+Dim ArrayBase As Integer
+Dim CurrentChar As String
+ArrayBase = 0 'Array Base is 1 in Crystal Reports and 0 in Microsoft VB
+Dim CurrentEncoding As String
+CurrentEncoding = ""
+DataToPrint = ""
+CorrectFNC = 0
+'in case ApplyTilde is null, set it to false
+If ApplyTilde &lt;&gt; True Then ApplyTilde = False
+PrintableString = ""
+'ApplyTilde ~???
+If ApplyTilde Then
+    F43Set = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ-. $/+%"
+    OnlyCorrectData = ""
+    StringLength = Len(DataToEncode)
+    For I = 1 To StringLength
+        If (I &lt; StringLength - 2) And Mid(DataToEncode, I, 1) = "~" And IsNumeric(Mid(DataToEncode, I + 1, 3)) Then
+            CurrentCharNum = Val(Mid(DataToEncode, I + 1, 3))
+            OnlyCorrectData = OnlyCorrectData &amp; ChrW(CurrentCharNum)
+            I = I + 3
+        Else
+           OnlyCorrectData = OnlyCorrectData &amp; Mid(DataToEncode, I, 1)
+        End If
+    Next I
+    DataToEncode = OnlyCorrectData
+End If
+'ApplyTilde ~m??
+If ApplyTilde Then
+    OutString = ""
+    StringLength = Len(DataToEncode)
+    For I = 1 To StringLength
+    	'' LM 2017
+        '' check tilde string for ~mNN (MOD10 for GS1) or ~fNN (MOD43 for HIBC) or ~iNN (MOD37 for ISBT)
+        If (i &lt; StringLength - 2) And _
+              (Mid(DataToEncode, i, 2) = "~m" Or Mid(DataToEncode, i, 2) = "~f" Or Mid(DataToEncode, i, 2) = "~i") And _
+               IsNumeric(Mid(DataToEncode, i + 2, 2)) Then
+            WeightValue = Val(Mid(DataToEncode, i + 2, 2))
+            If Mid(DataToEncode, i, 2) = "~m" Then
+                '' ~mNN (MOD10 for GS1)
+                datamod = ""
+                CharsAdded = 0
+                For j = i-1 To 1 Step -1
+                    If IsNumeric(Mid(OutString, j, 1)) Then
+                        datamod = Mid(OutString, j, 1) &amp; datamod
+                        CharsAdded = CharsAdded + 1
+                    End If
+                    'when the number of digits added to StringToCheck equals the weight value exit the for loop
+                    If CharsAdded = WeightValue Then
+                        Exit For
+                    End If
+                Next j
+                 '' MODU10
+                 M10OnlyCorrectData = ""
+                 M10StringLength = Len(datamod)
+                 'Check to make sure data is numeric and remove dashes, etc.
+                 For j = 1 To M10StringLength
+                    'Add all numbers to OnlyCorrectData string
+                     if IsNumeric(Mid(datamod, j, 1)) Then M10OnlyCorrectData = M10OnlyCorrectData &amp; Mid(datamod, j, 1)
+                 Next j
+                'Generate MOD 10 check digit
+                 M10Factor = 3
+                 M10WeightedTotal = 0
+                 M10StringLength = Len(M10OnlyCorrectData)
+                 For j = M10StringLength To 1 Step -1
+                'Get the value of each number starting at the end
+                'CurrentCharNum = Mid(M10NumberData, I, 1)
+                'Multiply by the weighting factor which is 3,1,3,1...
+                'and add the sum together
+                      M10WeightedTotal = M10WeightedTotal + (Val(Mid(M10OnlyCorrectData, j, 1)) * M10Factor)
+                      'Change factor for next calculation
+                      M10Factor = 4 - M10Factor
+                 Next j
+                'Find the CheckDigit by finding the smallest number that = a multiple of 10
+                 j = (M10WeightedTotal Mod 10)
+                 If j &lt;&gt; 0 Then
+                      CheckDigitValue = (10 - j)
+                 Else
+                      CheckDigitValue = 0
+                 End If
+                OutString = OutString &amp; ChrW(CheckDigitValue + 48)
+            elseif Mid(DataToEncode, i, 2) = "~f" Then
+    			'' ~fNN (MOD43 for HIBC)
+    			F43WeightTotal = 0
+                datamod = ""
+                CharsAdded = 0
+                For j = i-1 To 1 Step -1
+                    If InStr(F43Set, Mid(OutString, j, 1)) &gt; 0 Then
+                        datamod = Mid(OutString, j, 1) &amp; datamod
+                        CharsAdded = CharsAdded + 1
+                    End If
+                    'when the number of digits added to StringToCheck equals the weight value exit the for loop
+                    If CharsAdded = WeightValue Then
+                        Exit For
+                    End If
+                Next j
+                M10StringLength = Len(datamod)
+                For j = 1 To M10StringLength
+                    F43WeightTotal = F43WeightTotal + (InStr(F43Set, Mid(datamod, j, 1)) - 1)
+                Next j
+                F43WeightTotal = (F43WeightTotal Mod 43)
+                OutString = OutString &amp; Mid(F43Set, F43WeightTotal + 1, 1)
+            elseif (Mid(DataToEncode, i, 2) = "~i") Then
+    			'' ~iNN (MOD37 for ISBT)
+    			M37Correct = ""
+    			M37CharCode = 0
+    			M37CharValue = 0
+    			M37WeightTotal = 0
+    			M37CheckDigit = 0
+                datamod = ""
+                CharsAdded = 0
+                For j = i-1 To 1 Step -1
+                    M37CharCode = Asc(Mid(OutString, j, 1))
+                    If (M37CharCode &gt; 47 And M37CharCode &lt; 58) Or (M37CharCode &gt; 64 And M37CharCode &lt; 91) Then
+                        datamod = Mid(OutString, j, 1) &amp; datamod
+                        CharsAdded = CharsAdded + 1
+                    End If
+                    'when the number of digits added to StringToCheck equals the weight value exit the for loop
+                    If CharsAdded = WeightValue Then
+                        Exit For
+                    End If
+                Next j
+                M10StringLength = Len(datamod)
+                For j = 1 To M10StringLength
+                    M37CharCode = Asc(Mid(datamod, j, 1))
+                    '' 0-9
+                    If (M37CharCode &gt; 47 And M37CharCode &lt; 58) Then M37CharValue = M37CharCode - 48
+                    '' A-Z
+                    If (M37CharCode &gt; 64 And M37CharCode &lt; 591) Then M37CharValue = M37CharCode - 55
+
+                    M37WeightTotal = ((M37WeightTotal + M37CharValue) * 2) Mod 37
+                Next j
+    			M37CheckDigit = (38 - M37WeightTotal) Mod 37
+    			strTemp  = ""
+    			if (M37CheckDigit &lt; 10) then strTemp = Chr(M37CheckDigit + 48) '' 0-9
+    			if (M37CheckDigit &lt; 36 And M37CheckDigit &gt; 9) Then strTemp = Chr(M37CheckDigit + 55) '' A-Z
+    			if (M37CheckDigit = 36) Then strTemp = Chr(42)
+                OutString = OutString &amp; strTemp
+            end if
+            i = i + 3
+    Else
+           OutString = OutString &amp; Mid(DataToEncode, I, 1)
+        End If
+    Next I
+    DataToEncode = OutString
+End If
+DataToFormat = DataToEncode
+OnlyCorrectData = ""
+DataToEncode = ""
+DataToPrint = ""
+Dim SetC128() = { _
+"EFF", "FEF", "FFE", "BBG", "BCF", "CBF", "BFC", "BGB", "CFB", "FBC", _
+"FCB", "GBB", "AFJ", "BEJ", "BFI", "AJF", "BIF", "BJE", "FJA", "FAJ", _
+"FBI", "EJB", "FIB", "IEI", "IBF", "JAF", "JBE", "IFB", "JEB", "JFA", _
+"EEG", "EGE", "GEE", "ACG", "CAG", "CCE", "AGC", "CEC", "CGA", "ECC", _
+"GAC", "GCA", "AEK", "AGI", "CEI", "AIG", "AKE", "CIE", "IIE", "ECI", _
+"GAI", "EIC", "EKA", "EII", "IAG", "ICE", "KAE", "IEC", "IGA", "KEA", _
+"IMA", "FDA", "OAA", "ABH", "ADF", "BAH", "BDE", "DAF", "DBE", "AFD", _
+"AHB", "BED", "BHA", "DEB", "DFA", "HBA", "FAD", "MIA", "HAB", "CMA", _
+"ABN", "BAN", "BBM", "ANB", "BMB", "BNA", "MBB", "NAB", "NBA", "EEM", _
+"EME", "MEE", "AAO", "ACM", "CAM", "AMC", "AOA", "MAC", "MCA", "AIM", _
+"AMI", "IAM", "MAI", "EDB", "EBD", "EBJ"}
+'Here we select character set A, B or C for the START character
+'Start A = "EDB"
+'Start B = "EBD"
+'Start C = "EBJ"
+StringLength = Len(DataToFormat)
+CurrentCharNum = AscW(Mid(DataToFormat, 1, 1))
+'Set A?
+If CurrentCharNum &lt; 32 Then C128Start = "EDB"
+'Set B?
+If CurrentCharNum &gt; 31 And CurrentCharNum &lt; 127 Then C128Start = "EBD"
+If CurrentCharNum = 197 Then C128Start = "EBD"
+'Set C?
+If ((StringLength &gt; 3) And IsNumeric(Mid(DataToFormat, 1, 4))) Then C128Start = "EBJ"
+'202 &amp; 212-215 is for the FNC1, with this Start C is mandatory
+If CurrentCharNum = 202 Then C128Start = "EBJ"
+If CurrentCharNum &gt; 211 Then C128Start = "EBJ"
+If C128Start = "EDB" Then CurrentEncoding = "A"
+If C128Start = "EBD" Then CurrentEncoding = "B"
+If C128Start = "EBJ" Then CurrentEncoding = "C"
+For I = 1 To StringLength
+    CurrentCharNum = AscW(Mid(DataToFormat, I, 1))
+    'check for FNC1 in any set which is ASCII 202 and ASCII 212-219
+    If ((CurrentCharNum &gt; 201) And (CurrentCharNum &lt; 219)) Then
+        DataToEncode = DataToEncode &amp; ChrW(202)
+    'check for switching to character set C
+    ElseIf CurrentCharNum = 197 Then 
+        If CurrentEncoding = "C" Then 'switch to B
+            DataToEncode = DataToEncode &amp; ChrW(200)
+            CurrentEncoding = "B"
+        End If
+        DataToEncode = DataToEncode &amp; ChrW(197)
+    ElseIf ((I &lt; StringLength - 2) And (IsNumeric(Mid(DataToFormat, I, 1))) And (IsNumeric(Mid(DataToFormat, I + 1, 1))) And (IsNumeric(Mid(DataToFormat, I, 4)))) Or ((I &lt; StringLength) And (IsNumeric(Mid(DataToFormat, I, 1))) And (IsNumeric(Mid(DataToFormat, I + 1, 1))) And (CurrentEncoding = "C")) Then
+        'check to see if we have an odd number of numbers to encode,
+        'if so, stay in current set and then switch to save space
+        If CurrentEncoding &lt;&gt; "C" Then
+            J = I
+            Factor = 3
+            Do While J &lt;= StringLength And IsNumeric(Mid(DataToFormat, J, 1))
+                Factor = 4 - Factor
+                J = J + 1
+            Loop
+            If Factor = 1 Then
+                'if so stay in current set for 1 character to save space
+                DataToEncode = DataToEncode &amp; ChrW(CurrentCharNum)
+                I = I + 1
+            End If
+        End If
+        'switch to set C if not already in it
+        If CurrentEncoding &lt;&gt; "C" Then DataToEncode = DataToEncode &amp; ChrW(199)
+        CurrentEncoding = "C"
+        CurrentChar = Mid(DataToFormat, I, 2)
+        CurrentValue = Val(CurrentChar)
+        'set the CurrentValue to the number of String CurrentChar
+        DataToEncode = DataToEncode &amp; ChrW(CurrentValue + 32)
+        I = I + 1
+        'check for switching to character set A
+    ElseIf (I &lt;= StringLength) And ((AscW(Mid(DataToFormat, I, 1)) &lt; 31) Or ((CurrentEncoding = "A") And (AscW(Mid(DataToFormat, I, 1)) &gt; 32 And (AscW(Mid(DataToFormat, I, 1))) &lt; 96))) Then
+        'switch to set A if not already in it
+        If CurrentEncoding &lt;&gt; "A" Then DataToEncode = DataToEncode &amp; ChrW(201)
+        CurrentEncoding = "A"
+        'Get the ASCII value of the next character
+        CurrentCharNum = AscW(Mid(DataToFormat, I, 1))
+        If CurrentCharNum &lt; 32 Then
+            DataToEncode = DataToEncode &amp; ChrW(CurrentCharNum + 96)
+        ElseIf CurrentCharNum &gt; 32 Then
+            DataToEncode = DataToEncode &amp; ChrW(CurrentCharNum)
+        End If
+    'check for switching to character set B
+    ElseIf (I &lt;= StringLength) And (((AscW(Mid(DataToFormat, I, 1))) &gt; 31) And ((AscW(Mid(DataToFormat, I, 1)))) &lt; 127) Then
+        'switch to set B if not already in it
+        If CurrentEncoding &lt;&gt; "B" Then DataToEncode = DataToEncode &amp; ChrW(200)
+        CurrentEncoding = "B"
+        'Get the ASCII value of the next character
+        CurrentCharNum = AscW(Mid(DataToFormat, I, 1))
+        DataToEncode = DataToEncode &amp; ChrW(CurrentCharNum)
+    End If
+Next I
+'&lt;&lt;&lt; Calculate Modulo 103 Check Digit &gt;&gt;&gt;
+If C128Start = "EDB" Then WeightedTotal = 103 'CurrentEncoding = "A"
+If C128Start = "EBD" Then WeightedTotal = 104 'CurrentEncoding = "B"
+If C128Start = "EBJ" Then WeightedTotal = 105 'CurrentEncoding = "C"
+StringLength = Len(DataToEncode)
+For I = 1 To StringLength
+    CurrentCharNum = AscW(Mid(DataToEncode, I, 1))
+    If CurrentCharNum &lt; 135 Then CurrentValue = CurrentCharNum - 32
+    If CurrentCharNum &gt; 134 Then CurrentValue = CurrentCharNum - 100
+    If CurrentCharNum = 194 Then CurrentValue = 0
+    PrintableString = PrintableString &amp; SetC128(CurrentValue + ArrayBase)
+    CurrentValue = CurrentValue * I
+    WeightedTotal = WeightedTotal + CurrentValue
+Next I
+CheckDigitValue = (WeightedTotal Mod 103)
+DataToEncode = ""
+'GIAH produces the stop character.
+DataToPrint = C128Start &amp; PrintableString &amp; SetC128(CheckDigitValue + ArrayBase) &amp; "GIAH"
+'Universal to SymbolString conversion
+'At this point in the code, DataToPrint is the entire barcode string for the Universal Font
+SymbolString = ""
+StringLength = Len(DataToPrint)
+For I = 1 To StringLength
+    'Get the value of each
+    CurrentCharNum = AscW(Mid(DataToPrint, I, 1))
+    If CurrentCharNum &gt;= 65 And CurrentCharNum &lt;= 68 Then SymbolString = SymbolString &amp; (11+(CurrentCharNum - 65))
+    If CurrentCharNum &gt;= 69 And CurrentCharNum &lt;= 72 Then SymbolString = SymbolString &amp; (21+(CurrentCharNum - 69))
+    If CurrentCharNum &gt;= 73 And CurrentCharNum &lt;= 76 Then SymbolString = SymbolString &amp; (31+(CurrentCharNum - 73))
+    If CurrentCharNum &gt;= 77 And CurrentCharNum &lt;= 80 Then SymbolString = SymbolString &amp; (41+(CurrentCharNum - 77))
+    If CurrentCharNum &gt;= 87 And CurrentCharNum &lt;= 88 Then SymbolString = SymbolString &amp; (11+(CurrentCharNum - 87))
+    If CurrentCharNum &gt;= 89 And CurrentCharNum &lt;= 90 Then SymbolString = SymbolString &amp; (21+(CurrentCharNum - 89))
+Next I
+'SymbolString to Native Conversion
+'At this point in the code, SymbolString is the entire barcode string in number form
+'For example: 211214142112214121221114311321211232
+'Convert SymbolString to PrintableString
+Dim ww As String
+Dim wb As String
+Dim bw As String
+Dim bb As String
+ww = ChrW(32) 'SPACE
+If MonoSpaceFont = False Then ww = ChrW(32) &amp; ChrW(32) &amp; ChrW(32)
+wb = ChrW(9616)
+bw = ChrW(9612)
+bb = ChrW(9608)
+CurrentValue = 0
+PrintableString = ""
+Dim NextDigitUsed As Integer
+Dim StartOver As Integer
+NextDigitUsed = 0
+Factor = 3
+Dim SymbolStringLength
+SymbolStringLength = Len(SymbolString) - 1
+For I = 1 To SymbolStringLength
+    CurrentValue = Val(Mid(SymbolString, I, 1))
+    If NextDigitUsed = 1 Then 
+        'Because the next digit is used, remove 1 from CurrentValue
+        'unless CurrentValue is already 1
+        If CurrentValue &gt; 1 then
+            CurrentValue = CurrentValue - 1
+            NextDigitUsed = 0
+        Else
+            'CurrentValue was used in a previous step
+            NextDigitUsed = 1
+        End If
+    End If
+    If NextDigitUsed = 1 And CurrentValue = 1 Then
+        'There is nothing more here to do because the CurrentValue 
+        'was used in a previous step
+        NextDigitUsed = 0
+    Else
+        For J = 1 to CurrentValue
+            If J = CurrentValue Then
+                NextDigitUsed = 1
+                'We are at the end of the bar segment, borrow 1 segment from the next 
+                If Factor = 3 Then PrintableString = PrintableString &amp; bw
+                If Factor = 1 Then PrintableString = PrintableString &amp; wb
+            Else
+                NextDigitUsed = 0
+                If Factor = 3 Then PrintableString = PrintableString &amp; bb
+                If Factor = 1 Then PrintableString = PrintableString &amp; ww
+                J = J+1
+            End If
+        Next J
+    End If
+    Factor = 4 - Factor
+Next I
+For I = 1 to BarHeight
+    Formula = Formula &amp; ChrW(10) &amp; ChrW(13) &amp; PrintableString
+Next I
+IDAutomation_SSRS_Code128 = Formula
+
+ Catch ex As Exception
+     IDAutomation_SSRS_Code128 = "ERROR" &amp; " - " &amp; ex.Message
+ End Try
+
+End Function
+</Code>
+  <EmbeddedImages>
+    <EmbeddedImage Name="idautomation">
+      <MIMEType>image/png</MIMEType>
+      <ImageData>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</ImageData>
+    </EmbeddedImage>
+  </EmbeddedImages>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>9f0b6ff8-bae5-4bf0-9415-f051186a6519</rd:ReportID>
+</Report>

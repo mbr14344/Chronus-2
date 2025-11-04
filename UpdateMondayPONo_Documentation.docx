@@ -1,0 +1,78 @@
+# Documentation: UpdateMondayPONo Action and XMLCU.UpdateMondayFromPurchLine
+
+## Overview
+This document explains the functionality of the `UpdateMondayPONo` action in the `PurchaseOrderLineSubformPage` page extension, and details how the `XMLCU.UpdateMondayFromPurchLine` method works to update Monday.com via API integration.
+
+---
+
+## 1. UpdateMondayPONo Action
+
+### Purpose
+The `UpdateMondayPONo` action allows users to update the Purchase Order Number (PO No.) on Monday.com directly from the Purchase Order Subform in Business Central.
+
+### How It Works
+- The action is triggered from the Purchase Order Subform page.
+- It collects the selected purchase line (`PurchLine`) and retrieves the related item record.
+- It validates that the item has the necessary Monday.com integration fields (`Monday.com URL`, `BoardID`, `ItemID`).
+- It formats the PO number and constructs a JSON string with the update information.
+- It calls the `XMLCU.UpdateMondayFromPurchLine` method, passing the purchase line, board ID, item ID, and the JSON string.
+
+### Key Variables
+- `PurchLine`: The selected purchase line record.
+- `Item`: The item record related to the purchase line.
+- `BoardIDTxt`, `ItemIDTxt`: Monday.com Board and Item IDs.
+- `PoTxt`: The PO number as text.
+- `ValueJsonStr`: The JSON string containing the update payload.
+
+---
+
+## 2. XMLCU.UpdateMondayFromPurchLine Method
+
+### Purpose
+This method is responsible for sending updates to Monday.com using its API. It is called by the `UpdateMondayPONo` action to update the PO number for a specific item on Monday.com.
+
+### How It Works
+- Receives the purchase line, board ID, item ID, and the update payload as parameters.
+- Constructs an HTTP request to the Monday.com API endpoint.
+- Authenticates using an API key or token (typically stored in setup or configuration tables).
+- Sends the update (e.g., changing a column value or adding an update/comment) to the specified item on the specified board.
+- Handles the response, including error handling and logging if the update fails.
+
+### Typical API Flow
+1. **Prepare Request**: Build the HTTP request with the correct endpoint, headers (including authentication), and body (the update payload).
+2. **Send Request**: Use AL's HTTP client to send the request to Monday.com.
+3. **Process Response**: Check the response for success or errors, and handle accordingly.
+
+### Example (Pseudocode)
+```al
+procedure UpdateMondayFromPurchLine(PurchLine: Record "Purchase Line"; BoardID: Text; ItemID: Text; ValueJson: Text)
+begin
+    // Prepare HTTP request
+    // Set authentication headers
+    // Set request body with ValueJson
+    // Send request to Monday.com API
+    // Handle response
+end;
+```
+
+---
+
+## 3. Monday.com API Integration
+
+- Monday.com provides a RESTful API for updating boards, items, and columns.
+- Authentication is typically via an API token in the HTTP header.
+- Updates are sent as JSON payloads specifying the board, item, and the data to update.
+- The integration in AL uses the `HttpClient` and related types to perform these operations.
+
+---
+
+## 4. Summary
+- The `UpdateMondayPONo` action streamlines updating Monday.com with PO numbers from Business Central.
+- The `XMLCU.UpdateMondayFromPurchLine` method encapsulates the logic for communicating with Monday.com's API.
+- This integration ensures data consistency between Business Central and Monday.com, improving workflow automation.
+
+---
+
+## References
+- [Microsoft AL Language Documentation](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/)
+- [Monday.com API Documentation](https://api.developer.monday.com/docs)
